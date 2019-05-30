@@ -1,0 +1,29 @@
+cuda:3
+['-e', '15', '-m', 'resnet18', '-n', 'fm_ff_trills', '-l', '/data/arango/thesis_workspace/data/layer2']
+opts:  [('-e', '15'), ('-m', 'resnet18'), ('-n', 'fm_ff_trills'), ('-l', '/data/arango/thesis_workspace/data/layer2')]
+arg 15
+Load Path:  /data/arango/thesis_workspace/data/layer2
+Save Path:  /data/arango/thesis_workspace/model/
+Model:  resnet18
+Epochs:  15
+Model Name fm_ff_trills
+resnet18
+Default: Resnet18
+Creating learn from model
+epoch  train loss  valid loss  accuracy
+0      0.789268    0.827081    0.708000
+1      0.580427    0.605192    0.788000
+2      0.470362    0.466088    0.829333
+3      0.373820    0.451136    0.832000
+4      0.311145    0.462242    0.833333
+5      0.253558    0.535893    0.826667
+6      0.213348    0.513097    0.844000
+7      0.201600    0.513732    0.844000
+8      0.169566    0.557644    0.856000
+9      0.157334    0.547499    0.830667
+10     0.132046    0.577906    0.830667
+11     0.116549    0.602292    0.852000
+12     0.118798    0.615061    0.857333
+13     0.112691    0.661433    0.850667
+14     0.097007    0.658149    0.846667
+/data/arango/thesis_workspace/model/fm_ff_trills resnet18.h5
