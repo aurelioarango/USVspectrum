@@ -16,22 +16,8 @@ import pathlib
 """Importing Pytorch Training models"""
 
 sys.path.append(os.getcwd())
-from fastai.vision import *
 
-from TestImageModel import *
-from TrainImageModel import *
-from ReadParams import *
-
-
-"""
-Fastai version:
-Pytorch version: 1.0.1 CUDA 9.0
-PyQt5 
-
-"""
-
-
-
+import transfer_learning
 
 class usv_gui (QMainWindow):
     def __init__(self, parent=None):
@@ -219,16 +205,14 @@ class usv_gui (QMainWindow):
         """CHANGE Not USIGN COMMAND LINE"""
         #model, load_training_data, save_model_path, epochs = train_read_params(sys.argv[1:])
         model = 'resnet18' # can pick from any restnet, vgg, etc
-        load_training_data = self.path_classified
+        load_training_data_path = self.path_classified
         save_model_path = self.path_models
         print(save_model_path)
         epochs = 1
         print(epochs)
 
-        data = load_training(load_training_data)
+        transfer_learning.run('-d', load_training_data_path, '-m','resnet18', '-l', 0.0001, '-n', 1  )
 
-        """Training a model"""
-        learn = training(data, save_model_path, model, epochs)
 
         QMessageBox.about(self,'Warning', 'Done Training')
 
