@@ -11,7 +11,7 @@ from PyQt5 import QtWidgets, QtQuick
 import os, sys
 import subprocess
 import pathlib
-
+import threading
 
 """Importing Pytorch Training models"""
 
@@ -191,6 +191,8 @@ class usv_gui (QMainWindow):
 
             os.chdir(self.main_path)
             print(os.getcwd())
+    def done_training(self):
+        QMessageBox.about(self, 'Warning', 'Done Training')
 
     def train_model(self):
         print("training model")
@@ -202,25 +204,27 @@ class usv_gui (QMainWindow):
         #device = torch.device('cpu')
         #print(device)
 
-        """CHANGE Not USIGN COMMAND LINE"""
-        #model, load_training_data, save_model_path, epochs = train_read_params(sys.argv[1:])
+        """ Select model properties"""
         model = 'resnet18' # can pick from any restnet, vgg, etc
         load_training_data_path = self.path_classified
         save_model_path = self.path_models
         print(save_model_path)
         epochs = 1
         print(epochs)
-
-        transfer_learning.run('-d', load_training_data_path, '-m','resnet18', '-l', 0.0001, '-n', 1  )
-
-
-        QMessageBox.about(self,'Warning', 'Done Training')
-
-
         """Pass in classification folder"""
         """Pass the path to where to save the model"""
         """Return to working directory"""
+        """Using Threads to avoid GUI freezing"""
+        train_thread = threading.Thread(target= transfer_learning.main, args=(load_training_data_path,model, 10,
+                                                                              0.0001,save_model_path) )
+        train_thread.start()
+
+        QMessageBox(self,"Warning", "Finished Training Model")
+
+
         #os.chdir(self.path)
+
+
 
     def retrain_model(self):
         print("retraining model")
