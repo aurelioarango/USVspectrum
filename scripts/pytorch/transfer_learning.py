@@ -18,7 +18,7 @@ import copy
 # from optparse import OptionParser
 from argparse import ArgumentParser
 
-
+from PyQt5.QtWidgets import QMessageBox
 
 ######################################################################
 # Training the model
@@ -33,7 +33,8 @@ from argparse import ArgumentParser
 # In the following, parameter ``scheduler`` is an LR scheduler object from
 # ``torch.optim.lr_scheduler``.
 
-def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
+def train_model( model, criterion, optimizer, scheduler, device_, data_loaders, data_set_sizes,num_epochs=25 ):
+    #modelft, criterion, optimizer_ft, exp_lr_scheduler, device, dataloaders, dataset_sizes, num_epochs = epochs
     start = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())
@@ -55,9 +56,9 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
             running_corrects = 0
 
             # Iterate over data.
-            for inputs, labels in dataloaders[phase]:
-                inputs = inputs.to(device)
-                labels = labels.to(device)
+            for inputs, labels in data_loaders[phase]:
+                inputs = inputs.to(device_)
+                labels = labels.to(device_)
 
                 # zero the parameter gradients ??
                 optimizer.zero_grad()
@@ -78,8 +79,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                 running_loss += loss.item() * inputs.size(0)
                 running_corrects += torch.sum(preds == labels.data)
 
-            epoch_loss = running_loss / dataset_sizes[phase]
-            epoch_acc = running_corrects.double() / dataset_sizes[phase]
+            epoch_loss = running_loss / data_set_sizes[phase]
+            epoch_acc = running_corrects.double() / data_set_sizes[phase]
 
             print('{} Loss: {:.4f} Acc: {:.4f}'.format(phase, epoch_loss, epoch_acc))
 
@@ -97,25 +98,27 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     return model
 
 
-#####################################################
-# Load data
 
-data_transforms = {
-    'train': transforms.Compose(
-        [transforms.RandomAffine(0, scale=(1, 1.2)),
-         transforms.Resize(224),
-         transforms.ToTensor()
-         ]
-    ),
-    'val': transforms.Compose(
-        [transforms.Resize(224),
-         transforms.ToTensor()
-         ]
-    )
-}
 
-def main(data_dir, model, epochs, learning_rate ):
-    parser = ArgumentParser(description="This program retrains a deep learning model for Mouse call images")
+def main(data_dir, model_name, epochs, learning_rate, save_path ):
+
+    #####################################################
+    # Load data
+
+    data_transforms = {
+        'train': transforms.Compose(
+            [transforms.RandomAffine(0, scale=(1, 1.2)),
+             transforms.Resize(224),
+             transforms.ToTensor()
+             ]
+        ),
+        'val': transforms.Compose(
+            [transforms.Resize(224),
+             transforms.ToTensor()
+             ]
+        )
+    }
+    #parser = ArgumentParser(description="This program retrains a deep learning model for Mouse call images")
     #parser.add_argument("-d", "--data_dir", dest="data_dir", help="data directory containing train and val subfolder",
     #                    default="../../data")
     #parser.add_argument("-m", "--model", dest="model_file", help="pretrained model file")
@@ -136,18 +139,28 @@ def main(data_dir, model, epochs, learning_rate ):
 
 
     # Load pretrained model
-    model = torch.load(model)
-    model = model.to(device)
+    print(model_name)
+    modelft = models.alexnet()
+    #model = torch.load('resnet18.pth')
+    if model_name =='resnet18':
+        modelft=models.resnet18(pretrained=True)
+    elif model_name == 'vgg19':
+        models.vgg19(pretrained=True)
+    else:
+        modelft = models.resnet18(pretrained=True)
+
+    modelft = modelft.to(device)
+
     criterion = nn.CrossEntropyLoss()
 
     # Observe that all parameters are being optimized
-    optimizer_ft = optim.Adam(model.parameters(), lr=learning_rate)
+    optimizer_ft = optim.Adam(modelft.parameters(), lr=learning_rate)
 
     # Decay LR by a factor of 0.1 every 7 epochs
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=20, gamma=0.1)
 
     # Eval the initial model on the training and val data sets
-    model.eval()
+    modelft.eval()
     for phase in ['train', 'val']:
         # Iterate over data.
         running_loss = 0.0
@@ -155,7 +168,7 @@ def main(data_dir, model, epochs, learning_rate ):
         for inputs, labels in dataloaders[phase]:
             inputs = inputs.to(device)
             labels = labels.to(device)
-            outputs = model(inputs)
+            outputs = modelft(inputs)
             _, preds = torch.max(outputs, 1)
             loss = criterion(outputs, labels)
             running_loss += loss.item() * inputs.size(0)
@@ -171,10 +184,12 @@ def main(data_dir, model, epochs, learning_rate ):
     # It should take around 15-25 min on CPU. On GPU though, it takes less than a
     # minute.
     #
+    epochs = int(epochs)
+    print("Epochs ",epochs)
+    model = train_model(modelft, criterion, optimizer_ft, exp_lr_scheduler, device, dataloaders, dataset_sizes, num_epochs=epochs)
 
-    model = train_model(model, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=epochs)
-
-    torch.save(model, "model_retrained.h5")
+    model_name = save_path + model_name
+    torch.save(model,model_name)
 
 
     plt.ion()   # interactive mode
