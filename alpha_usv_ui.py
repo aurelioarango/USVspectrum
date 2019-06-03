@@ -219,7 +219,7 @@ class usv_gui (QMainWindow):
                                                                               0.0001,save_model_path) )
         train_thread.start()
 
-        QMessageBox(self,"Warning", "Finished Training Model")
+        #QMessageBox(self,"Warning", "Finished Training Model")
 
 
         #os.chdir(self.path)
