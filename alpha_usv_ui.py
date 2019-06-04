@@ -18,6 +18,8 @@ import threading
 sys.path.append(os.getcwd())
 
 import transfer_learning
+import pytorch_classify
+import glob
 
 class usv_gui (QMainWindow):
     def __init__(self, parent=None):
@@ -121,6 +123,8 @@ class usv_gui (QMainWindow):
         trainAction = QAction(QIcon('new.png'),"Train Model", self)
         retrainAction = QAction(QIcon('new.png'),"Retrain Model",self)
 
+        classifyAction = QAction(QIcon('new.png'), "Classify Data",self)
+
         exitAction = QAction(QIcon("exit24.png"), "Exit",self)
         exitAction.setShortcut("Ctrl+Q")
         exitAction.setStatusTip("Exit Application")
@@ -130,16 +134,21 @@ class usv_gui (QMainWindow):
         retrainAction.triggered.connect(self.retrain_model)
         exitAction.triggered.connect(self.close)
 
+        classifyAction.triggered.connect(self.classify_data)
+
 
         self.main_menu = self.menuBar()
         filemenu= self.main_menu.addMenu("&File")
         trainmenu = self.main_menu.addMenu("&Train")
+        classify_menu = self.main_menu.addMenu("&Classify")
+
 
         #trainmenu.addMenu("&TrainModel")
         """"-------------- ADDING MENU ACTIONS ------------------"""
         filemenu.addAction(exitAction)
         trainmenu.addAction(trainAction)
         trainmenu.addAction(retrainAction)
+        classify_menu.addAction(classifyAction)
 
 
 
@@ -228,6 +237,24 @@ class usv_gui (QMainWindow):
 
     def retrain_model(self):
         print("retraining model")
+
+
+    def classify_data(self):
+        """ Sorting"""
+
+        print('Models: ',self.path_models)
+        print('TestExtracted data: ', self.path_extracted)
+        list_of_models = glob.glob(self.path_models+"/*")
+        try:
+
+            latest_model = max(list_of_models, key=os.path.getctime)
+            print(latest_model)
+        except ValueError:
+            print("No Models in directory")
+        else:
+            print("ERROR: While locating model")
+
+        #pytorch_classify.main(self.path_extracted, self.path_models)
 
     def setup_environment(self):
         """Setting up the working space"""
