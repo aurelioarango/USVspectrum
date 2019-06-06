@@ -36,6 +36,7 @@ def load_test(path):
 
     return test_data
 
+
 def evaluate(test_data, model):
     testloader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
     classes  = ('FF', 'FM', 'Noise', 'Trills')
