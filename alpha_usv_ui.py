@@ -260,12 +260,13 @@ class usv_gui (QMainWindow):
 
         #print('Models: ',self.path_models)
         #print('TestExtracted data: ', self.path_extracted)
+        list_of_models=[]
         if platform.system() == "Windows":
             list_of_models = glob.glob(self.path_models+"\*")
         else:
-            list_of_model = glob.glob(self.path_models+"/*")
+            list_of_models = glob.glob(self.path_models+"/*")
 
-        print(list_of_models)
+        #print(list_of_models)
         #latest_model =''
         #try:
 
@@ -291,7 +292,7 @@ class usv_gui (QMainWindow):
         else:
             #print("path: ", self.path)
             self.path_images = self.path + '/usv_images'
-            self.path_extracted = self.path+'/usv_images/extracted/test'
+            self.path_extracted = self.path+'/usv_images/extracted/'
             self.path_classified = self.path+'/usv_images/classified'
             self.path_models = self.path+'/usv_models/'
             self.path_scripts = self.path+'/scripts'
