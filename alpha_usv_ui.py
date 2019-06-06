@@ -1,7 +1,7 @@
 """Importing QT UI TOOLS"""
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, \
     QComboBox, QFileDialog,QListWidget, QSpacerItem, QSizePolicy, QAction, QMainWindow, QFormLayout, QStyleFactory, \
-    QMessageBox
+    QMessageBox, QActionGroup
 
 from PyQt5.QtGui import QPixmap, QPalette, QIcon, QColor
 from PyQt5 import QtWidgets, QtQuick
@@ -20,6 +20,7 @@ sys.path.append(os.getcwd())
 import transfer_learning
 import pytorch_classify
 import glob
+import platform
 
 class usv_gui (QMainWindow):
     def __init__(self, parent=None):
@@ -128,11 +129,22 @@ class usv_gui (QMainWindow):
         exitAction = QAction(QIcon("exit24.png"), "Exit",self)
         exitAction.setShortcut("Ctrl+Q")
         exitAction.setStatusTip("Exit Application")
+        """Adding Selection for Training"""
+        resnet18Action =QAction(QIcon('new.png'),'Resnet18', self)
+        vgg19Action = QAction(QIcon('new.png'),'VGG19', self)
+
+
+
+        trainingGroup = QActionGroup(self)
+        trainingGroup.addAction(resnet18Action)
+        trainingGroup.addAction(vgg19Action)
+        resnet18Action.setChecked(True)
 
         """"-------------- CONNECT MENU ITEMS ------------------"""
         trainAction.triggered.connect(self.train_model)
         retrainAction.triggered.connect(self.retrain_model)
         exitAction.triggered.connect(self.close)
+        #trainingGroup.triggered.connect(self.retrain_model)
 
         classifyAction.triggered.connect(self.classify_data)
 
@@ -143,10 +155,14 @@ class usv_gui (QMainWindow):
         classify_menu = self.main_menu.addMenu("&Classify")
 
 
+
         #trainmenu.addMenu("&TrainModel")
         """"-------------- ADDING MENU ACTIONS ------------------"""
         filemenu.addAction(exitAction)
+
+        #filemenu.addAction(trainingGroup)
         trainmenu.addAction(trainAction)
+        trainmenu.addSeparator()
         trainmenu.addAction(retrainAction)
         classify_menu.addAction(classifyAction)
 
@@ -242,29 +258,45 @@ class usv_gui (QMainWindow):
     def classify_data(self):
         """ Sorting"""
 
-        print('Models: ',self.path_models)
-        print('TestExtracted data: ', self.path_extracted)
-        list_of_models = glob.glob(self.path_models+"/*")
-        try:
-
-            latest_model = max(list_of_models, key=os.path.getctime)
-            print(latest_model)
-        except ValueError:
-            print("No Models in directory")
+        #print('Models: ',self.path_models)
+        #print('TestExtracted data: ', self.path_extracted)
+        if platform.system() == "Windows":
+            list_of_models = glob.glob(self.path_models+"\*")
         else:
-            print("ERROR: While locating model")
+            list_of_model = glob.glob(self.path_models+"/*")
 
-        #pytorch_classify.main(self.path_extracted, self.path_models)
+        print(list_of_models)
+        #latest_model =''
+        #try:
+
+        latest_model = max(list_of_models, key=os.path.getctime)
+        print(latest_model)
+        #except ValueError:
+        #    print("No Models in directory")
+        #else:
+            #print("ERROR: While locating model")
+        #latest_model
+        pytorch_classify.main(self.path_extracted, latest_model)
 
     def setup_environment(self):
         """Setting up the working space"""
         self.path = os.getcwd()
-        self.path_images = self.path+'/usv_images'
-        #print("path: ", self.path)
-        self.path_extracted = self.path+'/usv_images/extracted'
-        self.path_classified = self.path+'/usv_images/classified'
-        self.path_models = self.path+'/usv_models'
-        self.path_scripts = self.path+'/scripts'
+
+        if platform.system() == "Windows":
+            self.path_images = self.path + '\\usv_images'
+            self.path_extracted = self.path + '\\usv_images\\extracted'
+            self.path_classified = self.path + '\\usv_images\\classified'
+            self.path_models = self.path + '\\usv_models'
+            self.path_scripts = self.path + '\\scripts'
+        else:
+            #print("path: ", self.path)
+            self.path_images = self.path + '/usv_images'
+            self.path_extracted = self.path+'/usv_images/extracted/test'
+            self.path_classified = self.path+'/usv_images/classified'
+            self.path_models = self.path+'/usv_models/'
+            self.path_scripts = self.path+'/scripts'
+
+
         """Verify And/Or Create Directories"""
         pathlib.Path(self.path_images).mkdir(parents=True, exist_ok=True)
         pathlib.Path(self.path_extracted).mkdir(parents=True, exist_ok=True)
@@ -273,7 +305,7 @@ class usv_gui (QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-    app
+
     execute = usv_gui()
     execute.show()
     app.exec_()

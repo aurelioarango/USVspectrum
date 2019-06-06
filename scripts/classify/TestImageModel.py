@@ -1,5 +1,6 @@
 
-from torchvision import datasets
+from torchvision import datasets, models
+
 import torch
 
 import torchvision
@@ -7,25 +8,32 @@ from torchvision import transforms
 
 import csv
 import numpy
+import os
 
-class ImagePathFolder(datasets.ImageFolder):
-#    def __init__(self):
-#        """BLANK"""
-    def __getitem__(self,index):
-        # Original ImageFolder  
-        original_tuple = super(ImagePathFolder, self).__getitem__(index)
-        # Image Path
-        path = self.imgs[index][0]
-        # New tuple that includes path
-        path_tuple = (original_tuple + (path,))
-        return path_tuple
 
 def load_model( PATH):
-    model = torch.load(PATH)
+    model = models.resnet18()
+    print("LoadModel:PATH: ",PATH)
+    model.load_state_dict(torch.load(PATH))
     return model
 
 def load_test(path):
-    test_data = ImagePathFolder(path, transform = transforms.Compose([transforms.ToTensor()]) )
+    data_transforms = {
+        'test': transforms.Compose(
+            [transforms.Resize(224),
+             transforms.ToTensor()
+             ]
+        )
+    }
+    print("path: ", path)
+    try:
+
+        test_data = datasets.ImageFolder(path, transform=data_transforms )
+
+    except FileNotFoundError:
+        print("Could not find 'Test' directory")
+    #test_data = ImagePathFolder(path, transform = transforms.Compose([transforms.ToTensor()]) )
+
     return test_data
 
 def evaluate(test_data, model):
@@ -33,7 +41,7 @@ def evaluate(test_data, model):
     classes  = ('FF', 'FM', 'Noise', 'Trills')
     # to save to file
     to_file = []
-    to_file.append('Image Path, GroundTruth, Predicted')
+    to_file.append('Image Path, Predicted')
     for data in testloader:
     # print(len(data))
         images, labels, path = data

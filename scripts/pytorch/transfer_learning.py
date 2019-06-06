@@ -20,19 +20,6 @@ from argparse import ArgumentParser
 
 from PyQt5.QtWidgets import QMessageBox
 
-######################################################################
-# Training the model
-# ------------------
-#
-# Now, let's write a general function to train a model. Here, we will
-# illustrate:
-#
-# -  Scheduling the learning rate
-# -  Saving the best model
-#
-# In the following, parameter ``scheduler`` is an LR scheduler object from
-# ``torch.optim.lr_scheduler``.
-
 def train_model( model, criterion, optimizer, scheduler, device_, data_loaders, data_set_sizes,num_epochs=25 ):
     #modelft, criterion, optimizer_ft, exp_lr_scheduler, device, dataloaders, dataset_sizes, num_epochs = epochs
     start = time.time()
@@ -118,16 +105,8 @@ def main(data_dir, model_name, epochs, learning_rate, save_path ):
              ]
         )
     }
-    #parser = ArgumentParser(description="This program retrains a deep learning model for Mouse call images")
-    #parser.add_argument("-d", "--data_dir", dest="data_dir", help="data directory containing train and val subfolder",
-    #                    default="../../data")
-    #parser.add_argument("-m", "--model", dest="model_file", help="pretrained model file")
-    #parser.add_argument("-n", "--epoch", dest="epoch", type=int, help="Num of epochs for training", default=25)
-    #parser.add_argument("-l", "--learn_rate", dest="lr", type=float, help="Starting Learning Rate", default=0.0001)
-    #args = parser.parse_args()
 
     """Load Data"""
-    #data_dir = args.data_dir  # "../../data/"
     image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x), transform=data_transforms[x]) for x in
                       ['train', 'val']}
     dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=32, shuffle=True) for x in ['train', 'val']}
@@ -176,20 +155,14 @@ def main(data_dir, model_name, epochs, learning_rate, save_path ):
 
         print('Original Model: {} Loss: {:.4f} {:.4f}'.format(phase, running_loss / dataset_sizes[phase],
                                                               running_corrects.double() / dataset_sizes[phase]))
-
-    ######################################################################
-    # Train and evaluate
-    # ^^^^^^^^^^^^^^^^^^
-    #
-    # It should take around 15-25 min on CPU. On GPU though, it takes less than a
-    # minute.
-    #
+    """Train and Evaluate"""
     epochs = int(epochs)
     print("Epochs ",epochs)
     model = train_model(modelft, criterion, optimizer_ft, exp_lr_scheduler, device, dataloaders, dataset_sizes, num_epochs=epochs)
 
     model_name = save_path + model_name
-    torch.save(model,model_name)
+    print(model_name)
+    torch.save(model.state_dict(),model_name)
 
 
     plt.ion()   # interactive mode
