@@ -1,0 +1,11 @@
+# ignore folder
+
+/usv_models/
+
+# ignore images
+
+*.png
+
+*.PNG
+
+
