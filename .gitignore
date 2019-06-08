@@ -1,11 +1,14 @@
 # ignore folder
+# Byte-compiled / optimized / DLL files
+*__pycache__*
 
 usv_models/
+models_extra/
 
 # ignore images
 
 *.png
 
 *.PNG
-
-
+#
+*.py[cod]

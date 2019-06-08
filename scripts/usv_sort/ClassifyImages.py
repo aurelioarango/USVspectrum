@@ -48,7 +48,8 @@ def save_images(path,usv_image_source_dir, prediction_folder):
     trills_path = []
     noise_path = []
     misclassified_path = []
-    
+
+
     # Make path dir according to windows or linux	
     if platform.system() == "Windows":
         # Create Paths for directories
