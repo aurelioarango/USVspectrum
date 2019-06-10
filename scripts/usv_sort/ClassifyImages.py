@@ -58,7 +58,7 @@ def save_images(path,usv_image_source_dir, prediction_folder):
         ff_path = path+'classified\\FF\\'
         trills_path = path+'classified\\Trills\\'
         noise_path = path+'classified\\Noise\\'
-        misclassified_path = path+'classified\\Misclassified\\'
+        #misclassified_path = path+'classified\\Misclassified\\'
     else:
         # Make path for directories
         fm_path = path+'classified/FM/'
@@ -66,7 +66,7 @@ def save_images(path,usv_image_source_dir, prediction_folder):
         ff_path = path+'classified/FF/'
         trills_path = path+'classified/Trills/'
         noise_path = path+'classified/Noise/'
-        misclassified_path = path+'classified/Misclassified/'
+        #misclassified_path = path+'classified/Misclassified/'
     # Create directories for image classes
     pathlib.Path(fm_path).mkdir(parents=True, exist_ok=True)
     pathlib.Path(ff_path).mkdir(parents=True, exist_ok=True)
@@ -131,12 +131,19 @@ def save_images(path,usv_image_source_dir, prediction_folder):
     print(misclassified_path)
 
 """-------------MAIN FUNCTION--------------"""
-"""
-if __name__ == "__main__":
+
+def main():
     usv_images, prediction = parse_file("predictions.txt")
-    path_to_dir = '/data/arango/thesis_workspace/data/'
+    path = os.pwd()
+    
+    if platform.system() == "Windows":
+        path_to_dir = path+ '\\new_classified_data\\'
+    else:
+        path_to_dir = path+ '/new_classified_data/'
+
+    
     save_images(path_to_dir, usv_images, prediction)
-"""
+
 
 
 
