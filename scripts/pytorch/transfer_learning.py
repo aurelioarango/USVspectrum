@@ -166,12 +166,10 @@ def main(data_dir, model_name, epochs, learning_rate, save_path ):
     print("Epochs ",epochs)
     model = train_model(modelft, criterion, optimizer_ft, exp_lr_scheduler, device, dataloaders, dataset_sizes, num_epochs=epochs)
 
-    model_name = ''
-
     if platform.system() == "Windows":
-        model_name = save_path + '\\' + model_name
+        model_name = save_path + '\\' + model_name+".pth"
     else:
-        model_name = save_path +'/' +model_name
+        model_name = save_path +'/' +model_name+".pth"
     print(model_name)
     torch.save(model,model_name)
 

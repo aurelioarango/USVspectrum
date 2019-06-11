@@ -81,7 +81,7 @@ def evaluate(test_data, model):
                 # print('images ',images) # actual images
             _, predicted = torch.max(outputs, 1)
                 # print('Predicted: ', ' '.join('%5s' % classes[predicted[j]] for j in range(3)))
-            out = path[0]+ ', predicted: {} '+classes[predicted[0]]
+            out = path[0]+ ', predicted: '+classes[predicted[0]]
             #print (predicted[0].argmax() )
             #out = classes[labels[0]] +',' + classes[predicted[0]]
             to_file.append(out)

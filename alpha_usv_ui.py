@@ -225,7 +225,7 @@ class usv_gui (QMainWindow):
         """Pass the path to where to save the model"""
         """Return to working directory"""
         """Using Threads to avoid GUI freezing"""
-        train_thread = threading.Thread(target= transfer_learning.main, args=(load_training_data_path,model, 10,
+        train_thread = threading.Thread(target= transfer_learning.main, args=(load_training_data_path,model, epochs,
                                                                               0.0001,save_model_path) )
         train_thread.start()
 
