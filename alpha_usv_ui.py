@@ -17,6 +17,14 @@ import platform
 """Importing Pytorch Training models"""
 
 sys.path.append(os.getcwd())
+if platform == "Windows":
+    sys.path.append(os.getcwd() + "\\scripts\\pytorch")
+    sys.path.append(os.getcwd() + "\\scripts\\classify")
+    sys.path.append(os.getcwd() + "\\scripts\\usv_sort")
+else:
+    sys.path.append(os.getcwd() + "/scripts/pytorch")
+    sys.path.append(os.getcwd() + "/scripts/classify")
+    sys.path.append(os.getcwd() + "/scripts/usv_sort")
 
 import transfer_learning
 import pytorch_classify
@@ -26,6 +34,7 @@ class usv_gui (QMainWindow):
     def __init__(self, parent=None):
         """--------------- ELEMENTS ------------------"""
         super(usv_gui, self).__init__(parent)
+
         #self.form_widget = QFormLayout(self)
         #QMainWindow.__init__(self)
         #self.setStyle(QStyleFactory.create('Fusion'))
@@ -130,7 +139,11 @@ class usv_gui (QMainWindow):
         exitAction.setShortcut("Ctrl+Q")
         exitAction.setStatusTip("Exit Application")
 
+        selectSurceAction = QAction(QIcon('new.png'), 'Open View Source', self)
+
         """"-------------- CONNECT MENU ITEMS ------------------"""
+        selectSurceAction.triggered.connect(self.select_view_folder)
+
         trainAction.triggered.connect(self.train_model)
         retrainAction.triggered.connect(self.retrain_model)
         exitAction.triggered.connect(self.close)
@@ -147,6 +160,7 @@ class usv_gui (QMainWindow):
         #trainmenu.addMenu("&TrainModel")
         """"-------------- ADDING MENU ACTIONS ------------------"""
         filemenu.addAction(exitAction)
+        filemenu.addAction(selectSurceAction)
         trainmenu.addAction(trainAction)
         trainmenu.addAction(retrainAction)
         classify_menu.addAction(classifyAction)
@@ -155,9 +169,9 @@ class usv_gui (QMainWindow):
 
 
     def open_folder(self):
-        self.main_path = os.getcwd()
 
-        self.fnames =QFileDialog.getOpenFileNames(self,'Open Folder', self.main_path)
+
+        self.fnames = QFileDialog.getOpenFileNames(self,'Open Folder', self.main_path)
         #fname = QFileDialog.getOpenFileName(self, 'Open file(s)', current_path, "USV file(s) (*.raw)")
         self.list.clear()
         #print(len(self.fnames))
@@ -234,7 +248,11 @@ class usv_gui (QMainWindow):
 
         #os.chdir(self.path)
 
+    def select_view_folder(self):
+        """Select a source folder to display images"""
 
+        #self.view_images = QFileDialog.getOpenFileNames(self, 'Open Folder', self.main_path)
+        self.view_images = QFileDialog.getExistingDirectory(self, 'Viewing Directory', self.path, QFileDialog.DontResolveSymlinks)
 
     def retrain_model(self):
         print("retraining model")
@@ -262,7 +280,7 @@ class usv_gui (QMainWindow):
         # else:
         # print("ERROR: While locating model")
         # latest_model
-        pytorch_classify.main(self.path_extracted, latest_model)
+        pytorch_classify.main(self.path_extracted, latest_model,self.path_output_classified)
 
 
     def setup_environment(self):
@@ -271,14 +289,16 @@ class usv_gui (QMainWindow):
         # print("path: ", self.path)
         if platform.system() == "Windows":
             self.path_images = self.path + '\\usv_images'
-            self.path_extracted = self.path + '\\usv_images\\extracted'
+            self.path_extracted = self.path + '\\usv_images\\extracted\\test'
             self.path_classified = self.path + '\\usv_images\\classified'
+            self.path_output_classified = self.path + '\\output'
             self.path_models = self.path + '\\usv_models'
             self.path_scripts = self.path + '\\scripts'
         else:
             self.path_images = self.path+'/usv_images'
-            self.path_extracted = self.path+'/usv_images/extracted'
+            self.path_extracted = self.path+'/usv_images/extracted/test'
             self.path_classified = self.path+'/usv_images/classified'
+            self.path_output_classified = self.path + '/output'
             self.path_models = self.path+'/usv_models'
             self.path_scripts = self.path+'/scripts'
 
@@ -290,7 +310,6 @@ class usv_gui (QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-    app
     execute = usv_gui()
     execute.show()
     app.exec_()

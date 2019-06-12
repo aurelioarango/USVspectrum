@@ -19,7 +19,7 @@ def parse_file(filename):
             data = line.split(",")
             usv_name = data[0]
             file_names.append(usv_name)
-            file_prediction = data[2]
+            file_prediction = data[1]
             file_predictions.append(file_prediction)
             # print(usv_name)
             # print(file_prediction)
@@ -47,7 +47,7 @@ def save_images(path,usv_image_source_dir, prediction_folder):
     ff_path =[]
     trills_path = []
     noise_path = []
-    misclassified_path = []
+    #misclassified_path = []
 
 
     # Make path dir according to windows or linux	
@@ -72,7 +72,7 @@ def save_images(path,usv_image_source_dir, prediction_folder):
     pathlib.Path(ff_path).mkdir(parents=True, exist_ok=True)
     pathlib.Path(trills_path).mkdir(parents=True, exist_ok=True)
     pathlib.Path(noise_path).mkdir(parents=True, exist_ok=True)
-    pathlib.Path(misclassified_path).mkdir(parents=True, exist_ok=True)    
+    #pathlib.Path(misclassified_path).mkdir(parents=True, exist_ok=True)
     
     for index in range(len(usv_image_source_dir)):
         # Grab path to image
@@ -100,50 +100,54 @@ def save_images(path,usv_image_source_dir, prediction_folder):
             pred = prediction_folder[index].strip().lower()
             print(dir_data, pred)
             # change to correct directory and save image
-            if pred == "FM".lower() and (pred in dir_data.lower()):
+            #if pred == "FM".lower() and (pred in dir_data.lower()):
+            if pred == "FM".lower():
                 # print(fm_path)
                 # print(os.getcwd())
                 os.chdir(fm_path)
                 img.save(image_filename)
-            elif pred == "FF".lower() and (pred in dir_data.lower()):
+            #elif pred == "FF".lower() and (pred in dir_data.lower()):
+            elif pred == "FF".lower():
                 #print(ff_path)
                 os.chdir(ff_path)
                 #print(os.getcwd())
                 img.save(image_filename)
-            elif pred == "Trills".lower() and (pred in dir_data.lower()):
+            #elif pred == "Trills".lower() and (pred in dir_data.lower()):
+            elif pred == "Trills".lower():
                 # print(trills_path)
                 # print(os.getcwd())
                 os.chdir(trills_path)
                 img.save(image_filename)
-            elif pred == "Noise".lower() and (pred in dir_data.lower()):
+            #elif pred == "Noise".lower() and (pred in dir_data.lower()):
+            elif pred == "Noise".lower():
                 # print(noise_path)
                 # print(os.getcwd())
                 os.chdir(noise_path)
                 img.save(image_filename)
-            else:
-                print("Missclasified, ", image_filename)
+            #else:
+            #    print("Missclasified, ", image_filename)
                 #print(image_filename)
-                os.chdir(misclassified_path)
-                img.save(image_filename)
+            #    os.chdir(misclassified_path)
+            #    img.save(image_filename)
 
         except IOError:
             print("Image not found")
-    print(misclassified_path)
+    print("Done")
 
 """-------------MAIN FUNCTION--------------"""
 
-def main():
-    usv_images, prediction = parse_file("predictions.txt")
-    path = os.pwd()
-    
-    if platform.system() == "Windows":
-        path_to_dir = path+ '\\new_classified_data\\'
-    else:
-        path_to_dir = path+ '/new_classified_data/'
+def main(file_to_parse, path_to_dir, out_path):
+    usv_images, prediction = parse_file(file_to_parse)
+    path = out_path
 
-    
+    #if platform.system() == "Windows":
+    #    path_to_dir = path+ '\\new_classified_data\\'
+    #else:
+    #    path_to_dir = path+ '/new_classified_data/'
+
+    print("Saving images: ", path_to_dir )
     save_images(path_to_dir, usv_images, prediction)
-
+    print("Done ")
 
 
 
