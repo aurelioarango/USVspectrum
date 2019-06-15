@@ -56,10 +56,19 @@ class usv_gui (QMainWindow):
         self.label = QLabel()
         self.fnames=None
         pixmap = QPixmap('test_image.png')
-        self.load_button = QPushButton('Load')
-        self.load_button.setStyleSheet(style)
 
+
+        self.load_button = QPushButton('Load')
         self.start_button = QPushButton('Start')
+        self.previous_button = QPushButton('Previous')
+        self.next_button = QPushButton('Next')
+
+        self.load_button.setStyleSheet(style)
+        self.start_button.setStyleSheet(style)
+        self.previous_button.setStyleSheet(style)
+        self.next_button.setStyleSheet(style)
+
+
         self.list = QListWidget()
         self.combobox = QComboBox()
         self.label.setPixmap(pixmap)

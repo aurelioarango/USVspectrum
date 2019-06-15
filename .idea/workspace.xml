@@ -1,137 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42f0b61b-cf93-490a-9dc7-782329a8a1d5" name="Default Changelist" comment="" />
-    <ignored path="usv_models/" />
-    <ignored path="usv_images/extracted/test/" />
+    <list default="true" id="42f0b61b-cf93-490a-9dc7-782329a8a1d5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/UI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usv_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/usv_ui.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1981860101">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="1356" />
-          <entry key="txt" value="32" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="PLAIN_TEXT" value="32" />
-          <entry key="Python" value="1356" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="2" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="946298237">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.14" value="1" />
-          <entry key="project.open.time.15" value="1" />
-          <entry key="project.open.time.21" value="1" />
-          <entry key="project.open.time.22" value="1" />
-          <entry key="project.opened" value="5" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="1" />
-          <entry key="txt" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="806" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="806" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/pytorch/transfer_learning.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/usv_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3432">
-              <caret line="173" column="20" selection-start-line="173" selection-start-column="20" selection-end-line="173" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha_usv_ui.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="304" column="46" lean-forward="true" selection-start-line="304" selection-start-column="46" selection-end-line="304" selection-end-column="46" />
+            <state relative-caret-position="159">
+              <caret line="106" column="8" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
               <folding>
                 <element signature="e#28#274#0" expanded="true" />
-                <marker date="1560373872250" expanded="true" signature="9281:9568" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/classify/pytorch_classify.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-              <folding>
-                <element signature="e#72#100#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/usv_sort/ClassifyImages.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1260">
-              <caret line="76" column="47" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="47" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/classify/TestImageModel.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="36" column="27" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="27" />
-              <folding>
-                <element signature="e#1#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -151,14 +41,10 @@
       <find>epochs</find>
       <find>save</find>
       <find>modelft</find>
-      <find>num_classes</find>
-      <find>cuda</find>
-      <find>proce</find>
-      <find>load</find>
-      <find>open_folder</find>
-      <find>main</find>
-      <find>setup_environment</find>
-      <find>extra</find>
+      <find>max</find>
+      <find>grid</find>
+      <find>glayout</find>
+      <find>hlayout</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -179,18 +65,21 @@
         <option value="$PROJECT_DIR$/scripts/fastai/main_test.py" />
         <option value="$PROJECT_DIR$/scripts/fastai/fastai_training.py" />
         <option value="$PROJECT_DIR$/scripts/fastai/main_train.py" />
+        <option value="$PROJECT_DIR$/scripts/classify/ClassifyImages.py" />
+        <option value="$PROJECT_DIR$/scripts/classify/pytorch_classify.py" />
+        <option value="$PROJECT_DIR$/scripts/usv_sort/ClassifyImages.py" />
+        <option value="$PROJECT_DIR$/alpha_usv_ui.py" />
         <option value="$PROJECT_DIR$/scripts/pytorch/transfer_learning.py" />
         <option value="$PROJECT_DIR$/scripts/classify/TestImageModel.py" />
-        <option value="$PROJECT_DIR$/scripts/usv_sort/ClassifyImages.py" />
-        <option value="$PROJECT_DIR$/scripts/classify/pytorch_classify.py" />
-        <option value="$PROJECT_DIR$/alpha_usv_ui.py" />
+        <option value="$PROJECT_DIR$/usv_ui.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="74" />
-    <option name="width" value="1804" />
-    <option name="height" value="1080" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="105" />
+    <option name="y" value="23" />
+    <option name="width" value="1604" />
+    <option name="height" value="1049" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -198,6 +87,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -205,45 +95,16 @@
               <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
               <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-              <item name="new_classified_data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-              <item name="new_classified_data" type="462c0819:PsiDirectoryNode" />
-              <item name="classified" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
-              <item name="usv_images" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/usv_models" />
-    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -257,7 +118,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.usv_ui">
     <configuration name="alpha_usv_ui" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="UI" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -279,8 +140,30 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="usv_ui" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="UI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/usv_ui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.usv_ui" />
         <item itemvalue="Python.alpha_usv_ui" />
       </list>
     </recent_temporary>
@@ -303,35 +186,28 @@
       <option name="project" value="LOCAL" />
       <updated>1559367190455</updated>
     </task>
-    <task id="LOCAL-00002" summary="&quot;Successful: Training Model&quot;">
-      <created>1559367425042</created>
+    <task id="LOCAL-00002" summary="&quot;Added classification menu and find latest model &quot;">
+      <created>1559674078752</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1559367425042</updated>
+      <updated>1559674078752</updated>
     </task>
-    <task id="LOCAL-00003" summary="&quot;Adding Test images and testloader&quot;">
-      <created>1559796784179</created>
+    <task id="LOCAL-00003" summary="&quot;Change Model save from weights to whole model&quot;">
+      <created>1560193443257</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1559796784179</updated>
+      <updated>1560193443257</updated>
     </task>
-    <task id="LOCAL-00004" summary="&quot;Removing some images&quot;">
-      <created>1559798256589</created>
+    <task id="LOCAL-00004" summary="&quot;Corrected model saved name&quot;">
+      <created>1560292491388</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1559798256589</updated>
+      <updated>1560292491388</updated>
     </task>
-    <task id="LOCAL-00005" summary="&quot;Display Model Error&quot;">
-      <created>1559848400527</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1559848400527</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -344,91 +220,53 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="74" y="0" width="1804" height="1080" extended-state="1" />
+    <frame x="105" y="23" width="1604" height="1049" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49709302" visible="true" weight="0.20954004" />
-      <window_info id="Structure" order="1" sideWeight="0.502907" side_tool="true" weight="0.09199318" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14971574" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.60079503" weight="0.3797753" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.46292135" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3260188" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39891893" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32756758" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.498037" weight="0.20062695" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49971956" visible="true" weight="0.3280899" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.399205" side_tool="true" weight="0.22696629" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49941176" weight="0.32864866" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32827735" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.20062695" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3291536" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50058824" side_tool="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49941176" weight="0.32936078" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49709302" visible="true" weight="0.09199318" />
-      <window_info id="Structure" order="1" sideWeight="0.502907" side_tool="true" visible="true" weight="0.09199318" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13716012" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.60079503" visible="true" weight="0.22696629" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39891893" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32790446" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32756758" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.498037" weight="0.20062695" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49971956" weight="0.32810867" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.399205" side_tool="true" visible="true" weight="0.22696629" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49941176" weight="0.32864866" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32827735" />
+      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.20108108" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50058824" side_tool="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49941176" weight="0.32936078" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
   </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
-      <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
-      </list>
-    </option>
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;Successful: Training Model&quot;" />
-    <MESSAGE value="&quot;Adding Test images and testloader&quot;" />
-    <MESSAGE value="&quot;Removing some images&quot;" />
-    <MESSAGE value="&quot;Display Model Error&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Display Model Error&quot;" />
+    <MESSAGE value="&quot;Added classification menu and find latest model &quot;" />
+    <MESSAGE value="&quot;Change Model save from weights to whole model&quot;" />
+    <MESSAGE value="&quot;Corrected model saved name&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Corrected model saved name&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -438,20 +276,7 @@
           <line>6</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scripts/classify/TestImageModel.py</url>
-          <line>70</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scripts/classify/TestImageModel.py</url>
-          <line>71</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
       </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -463,59 +288,57 @@
     <entry file="file://$PROJECT_DIR$/scripts/fastai/fastai_training.py" />
     <entry file="file://$PROJECT_DIR$/scripts/fastai/main_test.py" />
     <entry file="file://$PROJECT_DIR$/scripts/fastai/main_train.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/pytorch/Lib/site-packages/torchvision/datasets/folder.py" />
-    <entry file="file://$USER_HOME$/anaconda3/envs/pytorch/lib/python3.6/site-packages/torch/serialization.py" />
-    <entry file="file://$PROJECT_DIR$/predictions.txt">
+    <entry file="file://$PROJECT_DIR$/scripts/classify/ClassifyImages.py" />
+    <entry file="file://$PROJECT_DIR$/alpha_usv_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="708" column="70" selection-start-line="708" selection-start-column="70" selection-end-line="708" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/pytorch/transfer_learning.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3432">
-          <caret line="173" column="20" selection-start-line="173" selection-start-column="20" selection-end-line="173" selection-end-column="20" />
+        <state relative-caret-position="876">
+          <caret line="227" column="115" selection-start-line="227" selection-start-column="115" selection-end-line="227" selection-end-column="115" />
+          <folding>
+            <element signature="e#28#274#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/usv_sort/ClassifyImages.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="76" column="47" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="47" />
+        <state relative-caret-position="876">
+          <caret line="143" column="53" selection-start-line="143" selection-start-column="53" selection-end-line="143" selection-end-column="53" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha_usv_ui.py">
+    <entry file="file://$PROJECT_DIR$/scripts/pytorch/transfer_learning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="304" column="46" lean-forward="true" selection-start-line="304" selection-start-column="46" selection-end-line="304" selection-end-column="46" />
+        <state relative-caret-position="587">
+          <caret line="166" column="130" selection-start-line="166" selection-start-column="130" selection-end-line="166" selection-end-column="130" />
           <folding>
-            <element signature="e#28#274#0" expanded="true" />
-            <marker date="1560373872250" expanded="true" signature="9281:9568" ph="..." />
+            <element signature="e#65#77#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/classify/pytorch_classify.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-          <folding>
-            <element signature="e#72#100#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/classify/TestImageModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="36" column="27" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="27" />
+        <state relative-caret-position="553">
+          <caret line="83" column="30" selection-start-line="83" selection-start-column="30" selection-end-line="83" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usv_ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="106" column="8" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
           <folding>
-            <element signature="e#1#41#0" expanded="true" />
+            <element signature="e#28#274#0" expanded="true" />
           </folding>
         </state>
       </provider>
