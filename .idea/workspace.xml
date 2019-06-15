@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42f0b61b-cf93-490a-9dc7-782329a8a1d5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/UI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alpha_usv_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/alpha_usv_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/predictions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/classify/TestImageModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/classify/TestImageModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/classify/pytorch_classify.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/classify/pytorch_classify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/usv_sort/ClassifyImages.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/usv_sort/ClassifyImages.py" afterDir="false" />
-    </list>
+    <list default="true" id="42f0b61b-cf93-490a-9dc7-782329a8a1d5" name="Default Changelist" comment="" />
     <ignored path="usv_models/" />
     <ignored path="usv_images/extracted/test/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -217,6 +208,24 @@
             <path>
               <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
               <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
+              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+              <item name="new_classified_data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
+              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+              <item name="new_classified_data" type="462c0819:PsiDirectoryNode" />
+              <item name="classified" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
+              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
               <item name="usv_images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -337,18 +346,18 @@
   <component name="ToolWindowManager">
     <frame x="74" y="0" width="1804" height="1080" extended-state="1" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49709302" visible="true" weight="0.20954004" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49709302" visible="true" weight="0.20954004" />
       <window_info id="Structure" order="1" sideWeight="0.502907" side_tool="true" weight="0.09199318" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.60079503" visible="true" weight="0.3797753" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.60079503" weight="0.3797753" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.46292135" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32756758" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.498037" weight="0.20062695" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49971956" weight="0.3280899" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49971956" visible="true" weight="0.3280899" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.399205" side_tool="true" weight="0.22696629" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49941176" weight="0.32864866" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
