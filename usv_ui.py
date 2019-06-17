@@ -4,7 +4,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVB
     QMessageBox
 
 from PyQt5.QtGui import QPixmap, QPalette, QIcon, QColor
-from PyQt5 import QtWidgets, QtQuick
+from PyQt5 import QtWidgets, QtQuick, Qt
+
 
 """Importing System Tools"""
 
@@ -75,22 +76,28 @@ class usv_gui (QMainWindow):
         #self.setPalette(self.palet)
         self.resize(1000, 750)
 
-        verticalSpacer = QSpacerItem(200, 100, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        #verticalSpacer = QSpacerItem(200, 100, QSizePolicy.Minimum, QSizePolicy.Expanding)
         self.menu_bar()
 
         """"-------------- POSITION ------------------"""
+        #self.label.move(500, 300)
+        self.label.move(100,100)
+        self.list.move(100, 100)
 
         self.combobox.setMaximumSize(100, 25)
         self.label.setMinimumSize(500,500)
-        self.label.move(500,300)
-        self.list.move(100,200)
-        self.list.setMaximumSize(400,500)
+
+        self.list.setMaximumSize(500,500)
         self.load_button.setMaximumSize(100, 25)
         self.start_button.setMaximumSize(100, 25)
 
         """"-------------- CONNECT BUTTON ------------------"""
         self.load_button.clicked.connect(self.open_folder)
         self.start_button.clicked.connect(self.process_file)
+
+        self.previous_button.clicked.connect(self.previous_image)
+        self.next_button.clicked.connect(self.next_image)
+
 
         """"-------------- ADD WIDGETS ------------------"""
 
@@ -109,21 +116,32 @@ class usv_gui (QMainWindow):
 
         self.list.setStyleSheet("background: grey;")
 
-        self.glayout.addWidget(self.list, 0, 0)
+        self.glayout.addWidget(self.list, 0, 0, 5, 5)
         #self.glayout.addItem(verticalSpacer)
-        self.glayout.addWidget(self.label, 0, 2)
-        #self.glayout.addLayout(self.hlayout,0,0)
-        self.glayout.addWidget(self.combobox,2,0 )
-        self.glayout.addWidget(self.load_button, 1, 0)
-        self.glayout.addWidget(self.start_button, 3, 0)
+        self.glayout.addWidget(self.label, 0, 5, 5, 5 )
+
+        self.glayout.addWidget(self.combobox,9,0 )
+
+        """Buttons Postions"""
+
+        self.glayout.addWidget(self.load_button, 9, 2)
+        self.glayout.addWidget(self.start_button, 9, 3)
+        self.glayout.addWidget(self.previous_button, 9, 6)
+        self.glayout.addWidget(self.next_button, 9, 8)
+
+        self.spacer = QSpacerItem(20,20)
+        self.glayout.addItem(self.spacer,10,0 )
+
+        """Need to add other buttons"""
 
         """--------------------------------Adding place holder for Stats to the Screen------------------------------"""
         label_detection = QLabel("Detected: ")
         label_frequency = QLabel("Average Freq: ")
         label_duration = QLabel("Duration: ")
-        self.glayout.addWidget(label_detection, 1, 1)
-        self.glayout.addWidget(label_frequency, 2, 1)
-        self.glayout.addWidget(label_duration, 3, 1)
+        """Adding stats label"""
+        #self.glayout.addWidget(label_detection, 1, 1)
+        #self.glayout.addWidget(label_frequency, 2, 1)
+        #self.glayout.addWidget(label_duration, 3, 1)
 
 
         self.centralWidget().setLayout(self.glayout)
@@ -168,14 +186,57 @@ class usv_gui (QMainWindow):
 
         #trainmenu.addMenu("&TrainModel")
         """"-------------- ADDING MENU ACTIONS ------------------"""
+        """Adding to File Menu"""
         filemenu.addAction(exitAction)
         filemenu.addAction(selectSurceAction)
+        """Adding to Train Menu"""
         trainmenu.addAction(trainAction)
         trainmenu.addAction(retrainAction)
+        """Adding to Classify Menu"""
         classify_menu.addAction(classifyAction)
 
+    def keyPressEvent(self,event):
+        key = event.key()
+        print(key)
+        """Changed to correct call value, not hardcoded """
+        if key == 16777236:
+            self.next_image()
+        elif key == 16777234:
+            self.previous_image()
+
+    def select_view_folder(self):
+        """Select a source folder to display images"""
+
+        #self.view_images = QFileDialog.getOpenFileNames(self, 'Open Folder', self.main_path)
+        path = QFileDialog.getExistingDirectory(self, 'Viewing Directory', self.path_extracted, QFileDialog.DontResolveSymlinks)
+        self.current_image = 0
 
 
+        list_of_images = glob.glob(path+'/*.png')
+
+        #print(list_of_images)
+        self.view_images = list_of_images
+        if len (self.view_images) > 0:
+            self.label.setPixmap( QPixmap(self.view_images[0]))
+            #print(self.view_images[0])
+
+
+    def next_image(self):
+        """Select next image in foler"""
+        #print("next image")
+        if self.current_image < len(self.view_images):
+            self.current_image = self.current_image+1
+            self.label.setPixmap(QPixmap(self.view_images[self.current_image]))
+
+
+
+    def previous_image(self):
+        """Select previous image in folder"""
+        #print("previous image")
+        if self.current_image > 0 and self.current_image != 0:
+            self.current_image = self.current_image - 1
+
+            self.label.setPixmap(QPixmap(self.view_images[self.current_image]))
 
     def open_folder(self):
 
@@ -229,13 +290,6 @@ class usv_gui (QMainWindow):
 
     def train_model(self):
         print("training model")
-        """change to scripts path"""
-        #os.chdir(self.path_scripts)
-
-        """Call Fastai/pytorch script"""
-        #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        #device = torch.device('cpu')
-        #print(device)
 
         """ Select model properties"""
         model = 'resnet18' # can pick from any restnet, vgg, etc
@@ -257,11 +311,6 @@ class usv_gui (QMainWindow):
 
         #os.chdir(self.path)
 
-    def select_view_folder(self):
-        """Select a source folder to display images"""
-
-        #self.view_images = QFileDialog.getOpenFileNames(self, 'Open Folder', self.main_path)
-        self.view_images = QFileDialog.getExistingDirectory(self, 'Viewing Directory', self.path, QFileDialog.DontResolveSymlinks)
 
     def retrain_model(self):
         print("retraining model")
