@@ -247,7 +247,7 @@ class usv_gui (QMainWindow):
     def open_folder(self):
 
 
-        self.fnames = QFileDialog.getOpenFileNames(self,'Open Folder', self.main_path)
+        self.fnames = QFileDialog.getOpenFileNames(self,'Open Folder', self.path)
         #fname = QFileDialog.getOpenFileName(self, 'Open file(s)', current_path, "USV file(s) (*.raw)")
         self.list.clear()
         #print(len(self.fnames))
@@ -289,7 +289,7 @@ class usv_gui (QMainWindow):
                 subprocess.run(["matlab", "-nodesktop", "-nosplash", "-r",command])
                 print(self.list.currentIndex().data())
 
-            os.chdir(self.main_path)
+            os.chdir(self.path)
             print(os.getcwd())
     def done_training(self):
         QMessageBox.about(self, 'Warning', 'Done Training')
