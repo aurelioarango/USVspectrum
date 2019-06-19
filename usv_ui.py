@@ -1,11 +1,10 @@
 """Importing QT UI TOOLS"""
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, \
-    QComboBox, QFileDialog,QListWidget, QSpacerItem, QSizePolicy, QAction, QMainWindow, QFormLayout, QStyleFactory, \
-    QMessageBox
+from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, \
+    QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox
 
-from PyQt5.QtGui import QPixmap, QPalette, QIcon, QColor
-from PyQt5 import QtWidgets, QtQuick, Qt
-
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5 import QtWidgets
+import PyQt5.QtCore as QtCore
 
 """Importing System Tools"""
 
@@ -50,6 +49,8 @@ class usv_gui (QMainWindow):
         self.setCentralWidget(self.widget)
         self.centralWidget().setStyleSheet("background: grey")
 
+        self.current_image=0
+        self.view_images=[]
 
         self.vlayout = QVBoxLayout()
         self.hlayout = QHBoxLayout()
@@ -198,10 +199,15 @@ class usv_gui (QMainWindow):
     def keyPressEvent(self,event):
         key = event.key()
         print(key)
+        print(QtCore.Qt.RightArrow)
+
         """Changed to correct call value, not hardcoded """
         if key == 16777236:
+        #if key == QtCore.Qt.RightArrow:
+
             self.next_image()
         elif key == 16777234:
+        #elif key == QtCore.Qt.LeftArrow:
             self.previous_image()
 
     def select_view_folder(self):
@@ -289,22 +295,28 @@ class usv_gui (QMainWindow):
         QMessageBox.about(self, 'Warning', 'Done Training')
 
     def train_model(self):
-        print("training model")
+        #print("training model")
+
 
         """ Select model properties"""
-        model = 'resnet18' # can pick from any restnet, vgg, etc
-        load_training_data_path = self.path_classified
-        save_model_path = self.path_models
-        print(save_model_path)
-        epochs = 1
-        print(epochs)
-        """Pass in classification folder"""
-        """Pass the path to where to save the model"""
-        """Return to working directory"""
-        """Using Threads to avoid GUI freezing"""
-        train_thread = threading.Thread(target= transfer_learning.main, args=(load_training_data_path,model, epochs,
-                                                                              0.0001,save_model_path) )
-        train_thread.start()
+        model = 'resnet18' # can pick from any resnet, vgg, etc
+
+        load_training_data_path = QFileDialog.getExistingDirectory(self, 'Load Data Directory', self.path_classified,QFileDialog.DontResolveSymlinks)
+        #load_training_data_path = self.path_classified
+        if load_training_data_path:
+            save_model_path = self.path_models
+            print(save_model_path)
+            epochs = 1
+            print(epochs)
+            """Pass in classification folder"""
+            """Pass the path to where to save the model"""
+            """Return to working directory"""
+            """Using Threads to avoid GUI freezing"""
+            train_thread = threading.Thread(target= transfer_learning.main, args=(load_training_data_path,model, epochs,
+                                                                                  0.0001,save_model_path) )
+            train_thread.start()
+
+
 
         #QMessageBox(self,"Warning", "Finished Training Model")
 
@@ -321,24 +333,12 @@ class usv_gui (QMainWindow):
 
         # print('Models: ',self.path_models)
         # print('TestExtracted data: ', self.path_extracted)
-        list_of_models = []
-        if platform.system() == "Windows":
-            list_of_models = glob.glob(self.path_models + "\*")
-        else:
-            list_of_models = glob.glob(self.path_models + "/*")
-
-        # print(list_of_models)
-        # latest_model =''
-        # try:
-
-        latest_model = max(list_of_models, key=os.path.getctime)
-        print(latest_model)
-        # except ValueError:
-        #    print("No Models in directory")
-        # else:
-        # print("ERROR: While locating model")
-        # latest_model
-        pytorch_classify.main(self.path_extracted, latest_model,self.path_output_classified)
+        """Which Model to load """
+        selected_model = QFileDialog.getOpenFileName(self, 'Select Model', self.path_models,'*.pth')
+        """Create thread to classify or UI wil freeze"""
+        classify_thread = threading.Thread(target=pytorch_classify.main, args= (self.path_extracted, selected_model[0], self.path_output_classified) )
+        #pytorch_classify.main(self.path_extracted, selected_model[0], self.path_output_classified)
+        classify_thread.start()
 
 
     def setup_environment(self):
@@ -347,14 +347,14 @@ class usv_gui (QMainWindow):
         # print("path: ", self.path)
         if platform.system() == "Windows":
             self.path_images = self.path + '\\usv_images'
-            self.path_extracted = self.path + '\\usv_images\\extracted\\test'
+            self.path_extracted = self.path + '\\usv_images\\extracted\\'
             self.path_classified = self.path + '\\usv_images\\classified'
             self.path_output_classified = self.path + '\\output'
             self.path_models = self.path + '\\usv_models'
             self.path_scripts = self.path + '\\scripts'
         else:
             self.path_images = self.path+'/usv_images'
-            self.path_extracted = self.path+'/usv_images/extracted/test'
+            self.path_extracted = self.path+'/usv_images/extracted/'
             self.path_classified = self.path+'/usv_images/classified'
             self.path_output_classified = self.path + '/output'
             self.path_models = self.path+'/usv_models'

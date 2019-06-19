@@ -14,7 +14,7 @@ class ImageFolderWithPaths(datasets.ImageFolder):
     """Custom dataset that includes image file paths. Extends
     torchvision.datasets.ImageFolder
     """
-
+    #print(datasets.ImageFolder)
     # override the __getitem__ method. this is the method dataloader calls
     def __getitem__(self, index):
         # this is what ImageFolder normally returns
@@ -41,8 +41,10 @@ def load_model( PATH):
     return model
 
 def load_test(path):
-    data_transforms = transforms.Compose([transforms.ToTensor()])
+    #data_transforms = transforms.Compose([transforms.ToTensor()])
+    path = path + '/'
     print("path: ", path)
+
     try:
 
         #test_data = datasets.ImageFolder(os.path.join( path, 'test'), transform=data_transforms)
