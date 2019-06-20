@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42f0b61b-cf93-490a-9dc7-782329a8a1d5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/ui_elements/classifying_settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/classify/TestImageModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/classify/TestImageModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usv_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/usv_ui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/usv_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="291" column="26" selection-start-line="291" selection-start-column="26" selection-end-line="291" selection-end-column="26" />
+            <state relative-caret-position="212">
+              <caret line="381" column="42" selection-start-line="381" selection-start-column="42" selection-end-line="381" selection-end-column="42" />
               <folding>
                 <element signature="e#28#213#0" expanded="true" />
               </folding>
@@ -28,8 +30,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/classify/pytorch_classify.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="14" column="43" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="43" />
+            <state relative-caret-position="238">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/envs/pytorch/lib/python3.7/threading.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="674">
+              <caret line="916" selection-start-line="916" selection-end-line="916" />
             </state>
           </provider>
         </entry>
@@ -37,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/classify/TestImageModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-739">
-              <caret line="29" column="14" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="14" />
+            <state relative-caret-position="275">
+              <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
               <folding>
                 <element signature="e#1#41#0" expanded="true" />
               </folding>
@@ -98,13 +109,14 @@
         <option value="$PROJECT_DIR$/alpha_usv_ui.py" />
         <option value="$PROJECT_DIR$/scripts/pytorch/transfer_learning.py" />
         <option value="$PROJECT_DIR$/scripts/classify/pytorch_classify.py" />
+        <option value="$PROJECT_DIR$/scripts/ui_elements/classifying_settings.py" />
         <option value="$PROJECT_DIR$/scripts/classify/TestImageModel.py" />
         <option value="$PROJECT_DIR$/usv_ui.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="105" />
+    <option name="x" value="104" />
     <option name="y" value="23" />
     <option name="width" value="1604" />
     <option name="height" value="1049" />
@@ -127,24 +139,6 @@
               <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
               <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="classify" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="pytorch" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="USVspectrum" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USVspectrum" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="usv_sort" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -271,7 +265,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="105" y="23" width="1604" height="1049" extended-state="0" />
+    <frame x="104" y="23" width="1604" height="1049" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14971574" />
@@ -279,13 +273,13 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3260188" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3260188" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39811912" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32827735" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.20062695" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3291536" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3291536" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50058824" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49941176" weight="0.32936078" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -378,17 +372,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/ui_elements/classifying_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/classify/pytorch_classify.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="14" column="43" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="43" />
+        <state relative-caret-position="238">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/pytorch/lib/python3.7/threading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="674">
+          <caret line="916" selection-start-line="916" selection-end-line="916" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/classify/TestImageModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-739">
-          <caret line="29" column="14" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="14" />
+        <state relative-caret-position="275">
+          <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
           <folding>
             <element signature="e#1#41#0" expanded="true" />
           </folding>
@@ -397,8 +405,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/usv_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="291" column="26" selection-start-line="291" selection-start-column="26" selection-end-line="291" selection-end-column="26" />
+        <state relative-caret-position="212">
+          <caret line="381" column="42" selection-start-line="381" selection-start-column="42" selection-end-line="381" selection-end-column="42" />
           <folding>
             <element signature="e#28#213#0" expanded="true" />
           </folding>

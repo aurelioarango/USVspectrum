@@ -42,7 +42,7 @@ def load_model( PATH):
 
 def load_test(path):
     #data_transforms = transforms.Compose([transforms.ToTensor()])
-    path = path + '/'
+    #path = path + '/'
     print("path: ", path)
 
     try:

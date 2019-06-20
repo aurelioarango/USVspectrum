@@ -1,6 +1,6 @@
 """Importing QT UI TOOLS"""
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, \
-    QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox
+    QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox, QDialog, QDialogButtonBox
 
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5 import QtWidgets
@@ -333,12 +333,15 @@ class usv_gui (QMainWindow):
 
         # print('Models: ',self.path_models)
         # print('TestExtracted data: ', self.path_extracted)
+        selected_model =''
+        self.show_classify_dialog()
         """Which Model to load """
-        selected_model = QFileDialog.getOpenFileName(self, 'Select Model', self.path_models,'*.pth')
+        selected_model = QFileDialog.getOpenFileName(self, 'Select Model', self.path_models, 'Model ( *.pth )')
         """Create thread to classify or UI wil freeze"""
-        classify_thread = threading.Thread(target=pytorch_classify.main, args= (self.path_extracted, selected_model[0], self.path_output_classified) )
-        #pytorch_classify.main(self.path_extracted, selected_model[0], self.path_output_classified)
-        classify_thread.start()
+        """if selected_model:
+            classify_thread = threading.Thread(target=pytorch_classify.main, args= (self.path_extracted, selected_model[0], self.path_output_classified) )
+            #pytorch_classify.main(self.path_extracted, selected_model[0], self.path_output_classified)
+            classify_thread.start()"""
 
 
     def setup_environment(self):
@@ -365,6 +368,34 @@ class usv_gui (QMainWindow):
         pathlib.Path(self.path_extracted).mkdir(parents=True, exist_ok=True)
         pathlib.Path(self.path_classified).mkdir(parents=True, exist_ok=True)
         pathlib.Path(self.path_models).mkdir(parents=True, exist_ok=True)
+
+    def show_classify_dialog(self):
+        """Show Image dialog"""
+        dialog = QDialog()
+        dialog.setWindowTitle("Classify")
+        dialog.setMinimumSize(300,300)
+        dialog.setMaximumSize(300,300)
+
+
+        box = QDialogButtonBox(dialog)
+        box.setGeometry(QtCore.QRect(150, 250, 341, 32))
+        box.setOrientation(QtCore.Qt.Horizontal)
+        box.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
+        box.accepted.connect(dialog.accept)
+        box.rejected.connect(dialog.reject)
+
+        #cancel_button = QPushButton("Cancel",dialog)
+        #set_button = QPushButton("Set", dialog)
+        #cancel_button.move(30,250)
+        #set_button.move(200,250)
+        #set_button.acc
+
+
+
+
+
+        #dialog.setWindowModality(Qt.ApplicationModal)
+        dialog.exec_()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
