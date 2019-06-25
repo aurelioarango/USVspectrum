@@ -1,8 +1,9 @@
 """Importing QT UI TOOLS"""
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, \
-    QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox, QDialog, QDialogButtonBox
+    QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox, QDialog, QDialogButtonBox, \
+    QLineEdit
 
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QTextLine
 from PyQt5 import QtWidgets
 import PyQt5.QtCore as QtCore
 
@@ -336,7 +337,7 @@ class usv_gui (QMainWindow):
         selected_model =''
         self.show_classify_dialog()
         """Which Model to load """
-        selected_model = QFileDialog.getOpenFileName(self, 'Select Model', self.path_models, 'Model ( *.pth )')
+        self.selected_model = QFileDialog.getOpenFileName(self, 'Select Model', self.path_models, 'Model ( *.pth )')
         """Create thread to classify or UI wil freeze"""
         """if selected_model:
             classify_thread = threading.Thread(target=pytorch_classify.main, args= (self.path_extracted, selected_model[0], self.path_output_classified) )
@@ -373,29 +374,85 @@ class usv_gui (QMainWindow):
         """Show Image dialog"""
         dialog = QDialog()
         dialog.setWindowTitle("Classify")
-        dialog.setMinimumSize(300,300)
-        dialog.setMaximumSize(300,300)
+        dialog.setMinimumSize(500,300)
+        dialog.setMaximumSize(500,300)
 
 
-        box = QDialogButtonBox(dialog)
-        box.setGeometry(QtCore.QRect(150, 250, 341, 32))
-        box.setOrientation(QtCore.Qt.Horizontal)
-        box.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
-        box.accepted.connect(dialog.accept)
-        box.rejected.connect(dialog.reject)
+        #box = QDialogButtonBox(dialog)
+        #box.setGeometry(QtCore.QRect(150, 250, 341, 32))
+        #box.setOrientation(QtCore.Qt.Horizontal)
+        #box.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
+        #box.accepted.connect(dialog.accept)
+        #box.rejected.connect(dialog.reject)
 
-        #cancel_button = QPushButton("Cancel",dialog)
-        #set_button = QPushButton("Set", dialog)
-        #cancel_button.move(30,250)
-        #set_button.move(200,250)
+        #QtCore.QMetaObject.connectSlotsByName(dialog)
+
+        cancel_button = QPushButton("Cancel",dialog)
+        apply_button = QPushButton("Apply", dialog)
+        #set_button = QPushButton(QtWidgets.QDialogButtonBox.Apply)
+        cancel_button.move(15,250)
+        apply_button.move(400,250)
+
+        model_button = QPushButton("Model: ",dialog)
+        model_button.move(15,95)
+        model_button.clicked.connect(self.getmodel)
+        self.source_model = QLineEdit(dialog)
+        self.source_model.move(170, 100)
+
+        self.source_model.setMinimumSize(300,20)
+        self.source_model.setMaximumSize(300, 20)
+
+        dataout_button =QPushButton("Output Directory: ", dialog)
+        dataout_button.move(15,145)
+        dataout_button.clicked.connect(self.getoutdata)
+        self.source_dataout = QLineEdit(dialog)
+        self.source_dataout.move(170,150 )
+        self.source_dataout.setMinimumSize(300, 20)
+        self.source_dataout.setMaximumSize(300, 20)
+
+        source_button = QPushButton("Data Directory:", dialog)
+        source_button.move(15,195)
+        source_button.clicked.connect(self.getindata)
+        self.source_datain = QLineEdit(dialog)
+        self.source_datain.move(170,195)
+        self.source_datain.setMinimumSize(300, 20)
+        self.source_datain.setMaximumSize(300, 20)
+        # dialog.setWindowModality(Qt.ApplicationModal)
+        dialog.exec_()
         #set_button.acc
 
 
+    def getoutdata(self):
+        """Get data from line edit"""
+        #self.source_dataout.text()
+        path_outdir=QFileDialog.getExistingDirectory(self, 'Ouput Directory', self.path_output_classified,QFileDialog.DontResolveSymlinks)
+        if path_outdir:
+            self.source_dataout.setText(path_outdir)
+            #self.path_output_classified = path_outdir
 
+    def getindata(self):
+        """ """
+        path_indata = QFileDialog.getExistingDirectory(self, 'Source Data', self.path_classified,QFileDialog.DontResolveSymlinks)
+        if path_indata:
+            self.source_dataout.setText(path_indata)
+            #self.path_extracted = path_indata
 
+    def getmodel(self):
+        """Getting model"""
+        model_path, ok = QFileDialog.getOpenFileName(self, 'Open Model', self.path_models, "Models (*.pth)")
 
-        #dialog.setWindowModality(Qt.ApplicationModal)
-        dialog.exec_()
+        if ok:
+            self.source_model.setText(model_path)
+            #self.selected_model = model_path
+
+    def model_apply(self):
+        if self.temp_model_path and self.temp_path_indata and self.temp_path_outdir:
+            self.selected_model = self.temp_model_path
+            self.path_extracted = self.temp_path_indata
+            self.path_output_classified = self.temp_path_outdir
+        else:
+            print("Error while setting directory outputs")
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
