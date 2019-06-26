@@ -298,24 +298,25 @@ class usv_gui (QMainWindow):
     def train_model(self):
         #print("training model")
 
+        self.show_train_dialog()
 
         """ Select model properties"""
         model = 'resnet18' # can pick from any resnet, vgg, etc
 
-        load_training_data_path = QFileDialog.getExistingDirectory(self, 'Load Data Directory', self.path_classified,QFileDialog.DontResolveSymlinks)
+        #load_training_data_path = QFileDialog.getExistingDirectory(self, 'Load Data Directory', self.path_classified,QFileDialog.DontResolveSymlinks)
         #load_training_data_path = self.path_classified
-        if load_training_data_path:
-            save_model_path = self.path_models
-            print(save_model_path)
-            epochs = 1
-            print(epochs)
-            """Pass in classification folder"""
-            """Pass the path to where to save the model"""
-            """Return to working directory"""
-            """Using Threads to avoid GUI freezing"""
-            train_thread = threading.Thread(target= transfer_learning.main, args=(load_training_data_path,model, epochs,
-                                                                                  0.0001,save_model_path) )
-            train_thread.start()
+        #if load_training_data_path:
+        #    save_model_path = self.path_models
+        #    print(save_model_path)
+        #    epochs = 1
+        #    print(epochs)
+        #    """Pass in classification folder"""
+        #    """Pass the path to where to save the model"""
+        #    """Return to working directory"""
+        #    """Using Threads to avoid GUI freezing"""
+            #train_thread = threading.Thread(target= transfer_learning.main, args=(load_training_data_path,model, epochs,
+            #                                                                      0.0001,save_model_path) )
+            #train_thread.start()
 
 
 
@@ -337,13 +338,15 @@ class usv_gui (QMainWindow):
         selected_model =''
         self.show_classify_dialog()
         """Which Model to load """
-        self.selected_model = QFileDialog.getOpenFileName(self, 'Select Model', self.path_models, 'Model ( *.pth )')
+        #self.selected_model = QFileDialog.getOpenFileName(self, 'Select Model', self.path_models, 'Model ( *.pth )')
+        #self.selected_model
         """Create thread to classify or UI wil freeze"""
-        """if selected_model:
+        if self.classify_status:
             classify_thread = threading.Thread(target=pytorch_classify.main, args= (self.path_extracted, selected_model[0], self.path_output_classified) )
             #pytorch_classify.main(self.path_extracted, selected_model[0], self.path_output_classified)
-            classify_thread.start()"""
-
+            classify_thread.start()
+        else:
+            print("Cancelled")
 
     def setup_environment(self):
         """Setting up the working space"""
@@ -370,12 +373,34 @@ class usv_gui (QMainWindow):
         pathlib.Path(self.path_classified).mkdir(parents=True, exist_ok=True)
         pathlib.Path(self.path_models).mkdir(parents=True, exist_ok=True)
 
+    def show_train_dialog(self):
+        """Create Train Dialog"""
+        train_dialog = QDialog()
+        train_dialog.setWindowTitle("Training Window")
+        train_dialog.setMaximumSize(300,300)
+        train_dialog.setMinimumSize(300,300)
+        """Drop Menu"""
+        self.model_dropmenu = QComboBox(train_dialog)
+        self.model_dropmenu.move(15,50)
+        self.model_dropmenu.addItems(['resnet18','vgg19','alexnet','squeezenet','densenet','googlenet','shufflenet','resnext50_32x4d','inception'])
+        self.model_dropmenu.currentIndexChanged.connect(self.model_index_change)
+
+        train_dialog.exec_()
+    def model_index_change(self,index):
+        """Get model name"""
+        self.selected_model_name = self.model_dropmenu.currentText()
+
+        print(self.selected_model_name)
+
     def show_classify_dialog(self):
         """Show Image dialog"""
-        dialog = QDialog()
-        dialog.setWindowTitle("Classify")
-        dialog.setMinimumSize(500,300)
-        dialog.setMaximumSize(500,300)
+        self.classify_dialog = QDialog()
+        #dialog.setStyleSheet("background: grey;")
+        self.classify_dialog.setWindowTitle("Classify Window")
+        self.classify_dialog.setMinimumSize(600,300)
+        self.classify_dialog.setMaximumSize(600,300)
+
+
 
 
         #box = QDialogButtonBox(dialog)
@@ -387,45 +412,72 @@ class usv_gui (QMainWindow):
 
         #QtCore.QMetaObject.connectSlotsByName(dialog)
 
-        cancel_button = QPushButton("Cancel",dialog)
-        apply_button = QPushButton("Apply", dialog)
+        cancel_button = QPushButton("Cancel",self.classify_dialog)
+        apply_button = QPushButton("Apply", self.classify_dialog)
         #set_button = QPushButton(QtWidgets.QDialogButtonBox.Apply)
         cancel_button.move(15,250)
-        apply_button.move(400,250)
+        apply_button.move(500,250)
 
-        model_button = QPushButton("Model: ",dialog)
+        cancel_button.clicked.connect(self.cancel_classify)
+        apply_button.clicked.connect(self.apply_classify)
+
+        model_button = QPushButton("Model: ",self.classify_dialog)
         model_button.move(15,95)
         model_button.clicked.connect(self.getmodel)
-        self.source_model = QLineEdit(dialog)
+        self.source_model = QLineEdit(self.classify_dialog)
         self.source_model.move(170, 100)
 
-        self.source_model.setMinimumSize(300,20)
-        self.source_model.setMaximumSize(300, 20)
+        self.source_model.setMinimumSize(400,20)
+        self.source_model.setMaximumSize(400, 20)
 
-        dataout_button =QPushButton("Output Directory: ", dialog)
+        dataout_button =QPushButton("Output Directory: ", self.classify_dialog)
         dataout_button.move(15,145)
         dataout_button.clicked.connect(self.getoutdata)
-        self.source_dataout = QLineEdit(dialog)
+        self.source_dataout = QLineEdit(self.classify_dialog)
         self.source_dataout.move(170,150 )
-        self.source_dataout.setMinimumSize(300, 20)
-        self.source_dataout.setMaximumSize(300, 20)
+        self.source_dataout.setMinimumSize(400, 20)
+        self.source_dataout.setMaximumSize(400, 20)
 
-        source_button = QPushButton("Data Directory:", dialog)
+        source_button = QPushButton("Data Directory:", self.classify_dialog)
         source_button.move(15,195)
         source_button.clicked.connect(self.getindata)
-        self.source_datain = QLineEdit(dialog)
+        self.source_datain = QLineEdit(self.classify_dialog)
         self.source_datain.move(170,195)
-        self.source_datain.setMinimumSize(300, 20)
-        self.source_datain.setMaximumSize(300, 20)
-        # dialog.setWindowModality(Qt.ApplicationModal)
-        dialog.exec_()
-        #set_button.acc
+        self.source_datain.setMinimumSize(400, 20)
+        self.source_datain.setMaximumSize(400, 20)
 
+        try:
+
+            self.source_model.setText(self.path_models)
+            if self.source_model.text().find(".pth") == -1 :
+                self.source_model.setStyleSheet("color:red")
+                print("Color red")
+            else:
+                self.source_model.setStyleSheet("color:black")
+                print("Color black")
+
+            self.source_datain.setText(self.path_classified)
+            self.source_dataout.setText(self.path_output_classified)
+        except:
+            print("Cannot Set Field Values")
+
+
+        # dialog.setWindowModality(Qt.ApplicationModal)
+        self.classify_dialog.exec_()
+
+        #set_button.acc
+    def apply_classify(self):
+        self.classify_dialog.close()
+        self.classify_status= True
+
+    def cancel_classify(self):
+        self.classify_dialog.close()
+        self.classify_status = False
 
     def getoutdata(self):
         """Get data from line edit"""
         #self.source_dataout.text()
-        path_outdir=QFileDialog.getExistingDirectory(self, 'Ouput Directory', self.path_output_classified,QFileDialog.DontResolveSymlinks)
+        path_outdir=QFileDialog.getExistingDirectory(self, 'Output Directory', self.path_output_classified,QFileDialog.DontResolveSymlinks)
         if path_outdir:
             self.source_dataout.setText(path_outdir)
             #self.path_output_classified = path_outdir
@@ -444,6 +496,15 @@ class usv_gui (QMainWindow):
         if ok:
             self.source_model.setText(model_path)
             #self.selected_model = model_path
+        self.selected_model = model_path
+
+
+        if self.source_model.text().find(".pth") == -1:
+            self.source_model.setStyleSheet("color:red")
+            print("Color red")
+        else:
+            self.source_model.setStyleSheet("color:black")
+            print("Color black")
 
     def model_apply(self):
         if self.temp_model_path and self.temp_path_indata and self.temp_path_outdir:
