@@ -1,7 +1,7 @@
 """Importing QT UI TOOLS"""
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, \
     QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox, QDialog, QDialogButtonBox, \
-    QLineEdit
+    QLineEdit, QDoubleSpinBox, QSpinBox
 
 from PyQt5.QtGui import QPixmap, QIcon, QTextLine
 from PyQt5 import QtWidgets
@@ -301,12 +301,12 @@ class usv_gui (QMainWindow):
         self.show_train_dialog()
 
         """ Select model properties"""
-        model = 'resnet18' # can pick from any resnet, vgg, etc
+
 
         #load_training_data_path = QFileDialog.getExistingDirectory(self, 'Load Data Directory', self.path_classified,QFileDialog.DontResolveSymlinks)
         #load_training_data_path = self.path_classified
-        #if load_training_data_path:
-        #    save_model_path = self.path_models
+        if self.model_run_status:
+            save_model_path = self.path_models
         #    print(save_model_path)
         #    epochs = 1
         #    print(epochs)
@@ -314,9 +314,9 @@ class usv_gui (QMainWindow):
         #    """Pass the path to where to save the model"""
         #    """Return to working directory"""
         #    """Using Threads to avoid GUI freezing"""
-            #train_thread = threading.Thread(target= transfer_learning.main, args=(load_training_data_path,model, epochs,
-            #                                                                      0.0001,save_model_path) )
-            #train_thread.start()
+            train_thread = threading.Thread(target= transfer_learning.main, args=(self.path_classified,
+                                self.selected_model_name, self.epochs, self.learning_rate, self.model_save_directory))
+            train_thread.start()
 
 
 
@@ -375,22 +375,136 @@ class usv_gui (QMainWindow):
 
     def show_train_dialog(self):
         """Create Train Dialog"""
-        train_dialog = QDialog()
-        train_dialog.setWindowTitle("Training Window")
-        train_dialog.setMaximumSize(300,300)
-        train_dialog.setMinimumSize(300,300)
+        self.train_dialog = QDialog()
+        self.train_dialog.setWindowTitle("Training Window")
+        self.train_dialog.setMaximumSize(600,300)
+        self.train_dialog.setMinimumSize(600,300)
         """Drop Menu"""
-        self.model_dropmenu = QComboBox(train_dialog)
+        self.model_dropmenu = QComboBox(self.train_dialog)
         self.model_dropmenu.move(15,50)
         self.model_dropmenu.addItems(['resnet18','vgg19','alexnet','squeezenet','densenet','googlenet','shufflenet','resnext50_32x4d','inception'])
         self.model_dropmenu.currentIndexChanged.connect(self.model_index_change)
 
-        train_dialog.exec_()
+        cancel_button = QPushButton("Cancel", self.train_dialog)
+        run_button = QPushButton("Run", self.train_dialog)
+
+        cancel_button.move(15, 250)
+        run_button.move(500, 250)
+
+        source_button = QPushButton("Data Directory:", self.train_dialog)
+        source_button.move(11, 90)
+        source_button.clicked.connect(self.set_training_data)
+        self.source_training_data = QLineEdit(self.path_classified, self.train_dialog)
+        self.source_training_data.move(170,95)
+        self.source_training_data.setMinimumSize(400,20)
+        self.source_training_data.setMaximumSize(400,20)
+
+
+
+        """Setup of Learning Rate"""
+        self.source_learning_rate = QDoubleSpinBox(self.train_dialog)
+        self.source_learning_rate.move(300,50)
+        self.source_learning_rate.setDecimals(6)
+        self.source_learning_rate.setSingleStep(0.0001)
+        self.source_learning_rate.setRange(0.00001,1)
+        self.source_learning_rate.setValue(0.0001)
+        self.source_learning_rate.valueChanged.connect(self.model_learning_rate_change)
+
+        learning_rate_label = QLabel(self.train_dialog)
+        learning_rate_label.setText("Learning Rate: ")
+        learning_rate_label.move(200,54)
+        """Setup of Number of Epochs"""
+        self.source_epochs = QSpinBox(self.train_dialog)
+        self.source_epochs.move(500,50)
+        self.source_epochs.setSingleStep(10)
+        self.source_epochs.setRange(1,1000)
+        self.source_epochs.setValue(10)
+        self.source_epochs.valueChanged.connect(self.model_epochs_change)
+
+        epochs_label = QLabel(self.train_dialog)
+        epochs_label.move(450,54)
+        epochs_label.setText("Epochs: ")
+
+        """Setting up Model Name"""
+
+        self.source_model_name = QLineEdit(self.train_dialog)
+        self.source_model_name.move(170,140)
+        self.source_model_name.setMaximumSize(400,20)
+        self.source_model_name.setMinimumSize(400,20)
+        self.source_model_name.textChanged.connect(self.model_name_text_change)
+
+        model_name_label = QLabel(self.train_dialog,text="Model Name: ")
+        model_name_label.move(20,144)
+        """Where to save model"""
+
+        model_save_directory_button = QPushButton("Save Directory",self.train_dialog)
+        model_save_directory_button.move(15, 190)
+        model_save_directory_button.clicked.connect(self.model_save_directory)
+
+
+        self.source_save_training_directory =QLineEdit(self.path_models,self.train_dialog)
+        self.source_save_training_directory.move(170, 190)
+        self.source_save_training_directory.setMinimumSize(400, 20)
+        self.source_save_training_directory.setMaximumSize(400, 20)
+
+        cancel_button.clicked.connect(self.model_cancel)
+        run_button.clicked.connect(self.model_run)
+
+        self.learning_rate = 0.0001
+        self.epochs=10
+        self.model_run_status = False
+
+        self.train_dialog.exec_()
+
+
+    def model_cancel(self):
+        self.train_dialog.close()
+        self.model_run_status = False
+
+    def model_run(self):
+        self.train_dialog.close()
+        if self.source_model_name.text() != "":
+            self.model_run_status = True
+        else:
+            self.model_run_status = False
+
+    def model_save_directory(self):
+
+        path_outdir = QFileDialog.getExistingDirectory(self, 'Data Directory', self.path_output_classified,
+                                                        QFileDialog.DontResolveSymlinks)
+        if path_outdir:
+            self.path_models = self.source_save_training_directory.text()
+
+
+    def set_training_data(self):
+        """ Set source directory to train data """
+        path_outdir = QFileDialog.getExistingDirectory(self, 'Model Directory', self.path_output_classified,
+                                                       QFileDialog.DontResolveSymlinks)
+        if path_outdir:
+            self.path_classified = self.source_training_data.text()
+        #print(self.path_classified)
+    def model_name_text_change(self):
+
+        self.model_name = self.source_model_name.text()
+
+        #print(self.model_name)
+
+    def model_epochs_change(self):
+        """Retrieving Number of Epochs"""
+        self.epochs =self.source_epochs.value()
+        #print(self.epochs)
+    def model_learning_rate_change(self):
+        """Retrieving  learning rate"""
+        self.learning_rate = self.source_learning_rate.value()
+        #print(self.learning_rate)
+
+
     def model_index_change(self,index):
         """Get model name"""
         self.selected_model_name = self.model_dropmenu.currentText()
+        self.source_model_name.setText(self.selected_model_name)
 
-        print(self.selected_model_name)
+        #print(self.selected_model_name)
 
     def show_classify_dialog(self):
         """Show Image dialog"""
@@ -400,17 +514,6 @@ class usv_gui (QMainWindow):
         self.classify_dialog.setMinimumSize(600,300)
         self.classify_dialog.setMaximumSize(600,300)
 
-
-
-
-        #box = QDialogButtonBox(dialog)
-        #box.setGeometry(QtCore.QRect(150, 250, 341, 32))
-        #box.setOrientation(QtCore.Qt.Horizontal)
-        #box.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
-        #box.accepted.connect(dialog.accept)
-        #box.rejected.connect(dialog.reject)
-
-        #QtCore.QMetaObject.connectSlotsByName(dialog)
 
         cancel_button = QPushButton("Cancel",self.classify_dialog)
         apply_button = QPushButton("Apply", self.classify_dialog)
@@ -461,7 +564,7 @@ class usv_gui (QMainWindow):
         except:
             print("Cannot Set Field Values")
 
-
+        self.classify_status = False
         # dialog.setWindowModality(Qt.ApplicationModal)
         self.classify_dialog.exec_()
 
