@@ -315,7 +315,7 @@ class usv_gui (QMainWindow):
         #    """Return to working directory"""
         #    """Using Threads to avoid GUI freezing"""
             train_thread = threading.Thread(target= transfer_learning.main, args=(self.path_classified,
-                                self.selected_model_name, self.epochs, self.learning_rate, self.model_save_directory))
+                                self.selected_model_name, self.epochs, self.learning_rate, self.path_models))
             train_thread.start()
 
 
@@ -582,7 +582,7 @@ class usv_gui (QMainWindow):
         #self.source_dataout.text()
         path_outdir=QFileDialog.getExistingDirectory(self, 'Output Directory', self.path_output_classified,QFileDialog.DontResolveSymlinks)
         if path_outdir:
-            self.source_dataout.setText(path_outdir)
+            self.source_datain.setText(path_outdir)
             #self.path_output_classified = path_outdir
 
     def getindata(self):

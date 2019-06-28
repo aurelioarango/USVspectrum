@@ -16,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/usv_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="566" column="36" selection-start-line="566" selection-start-column="36" selection-end-line="566" selection-end-column="36" />
+            <state relative-caret-position="503">
+              <caret line="584" column="30" selection-start-line="584" selection-start-column="30" selection-end-line="584" selection-end-column="30" />
               <folding>
                 <element signature="e#28#273#0" expanded="true" />
               </folding>
@@ -143,9 +143,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="347" />
-    <option name="y" value="23" />
-    <option name="width" value="1604" />
+    <option name="x" value="671" />
+    <option name="y" value="25" />
+    <option name="width" value="1321" />
     <option name="height" value="1049" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -316,15 +316,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="347" y="23" width="1604" height="1049" extended-state="0" />
-    <editor active="true" />
+    <frame x="671" y="25" width="1321" height="1049" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14971574" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18230769" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.14106584" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28526646" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39811912" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -439,8 +438,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/usv_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="566" column="36" selection-start-line="566" selection-start-column="36" selection-end-line="566" selection-end-column="36" />
+        <state relative-caret-position="503">
+          <caret line="584" column="30" selection-start-line="584" selection-start-column="30" selection-end-line="584" selection-end-column="30" />
           <folding>
             <element signature="e#28#273#0" expanded="true" />
           </folding>
