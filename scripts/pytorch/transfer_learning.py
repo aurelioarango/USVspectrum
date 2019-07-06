@@ -90,7 +90,7 @@ def train_model( model, criterion, optimizer, scheduler, device_, data_loaders, 
 
 
 
-def main(data_dir, model_name, epochs, learning_rate, save_path ):
+def main(data_dir,selected_model ,model_name, epochs, learning_rate, save_path ):
 
     #####################################################
     # Load data
@@ -121,13 +121,31 @@ def main(data_dir, model_name, epochs, learning_rate, save_path ):
 
 
     # Load pretrained model
-    print(model_name)
+    print(selected_model)
     modelft = models.alexnet()
     #model = torch.load('resnet18.pth')
-    if model_name =='resnet18':
-        modelft=models.resnet18(pretrained=True)
-    elif model_name == 'vgg19':
-        models.vgg19(pretrained=True)
+    if selected_model =='resnet18':
+        modelft = models.resnet18(pretrained=True)
+    elif selected_model == 'vgg19':
+        modelft = models.vgg19(pretrained=True)
+    elif selected_model == 'alexnet':
+        modelft = models.alexnet(pretrained=True)
+    elif selected_model == 'squeezenet':
+        modelft = models.squeezenet1_0(pretrained=True)
+    elif selected_model == 'densenet':
+        modelft = models.densenet121(pretrained=True)
+    elif selected_model == 'googlenet':
+        modelft = models.googlenet(pretrained=True)
+    elif selected_model == 'resnet34':
+        modelft = models.resnet34(pretrained=True)
+    elif selected_model == 'resnet50':
+        modelft = models.resnet50(pretrained=True)
+    elif selected_model == 'resnet101':
+        modelft = models.resnet101(pretrained=True)
+    elif selected_model == 'resnet152':
+        modelft = models.resnet152(pretrained=True)
+    elif selected_model == 'resnext50_32x4d':
+        modelft = models.resnext50_32x4d(pretrained=True)
     else:
         modelft = models.resnet18(pretrained=True)
 

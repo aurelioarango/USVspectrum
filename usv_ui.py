@@ -315,7 +315,7 @@ class usv_gui (QMainWindow):
         #    """Return to working directory"""
         #    """Using Threads to avoid GUI freezing"""
             train_thread = threading.Thread(target= transfer_learning.main, args=(self.path_classified,
-                                self.selected_model_name, self.epochs, self.learning_rate, self.path_models))
+                                self.selected_model_name, self.model_name, self.epochs, self.learning_rate, self.path_models))
             train_thread.start()
 
 
@@ -335,14 +335,14 @@ class usv_gui (QMainWindow):
 
         # print('Models: ',self.path_models)
         # print('TestExtracted data: ', self.path_extracted)
-        selected_model =''
+        #selected_model =''
         self.show_classify_dialog()
         """Which Model to load """
         #self.selected_model = QFileDialog.getOpenFileName(self, 'Select Model', self.path_models, 'Model ( *.pth )')
         #self.selected_model
         """Create thread to classify or UI wil freeze"""
         if self.classify_status:
-            classify_thread = threading.Thread(target=pytorch_classify.main, args= (self.path_extracted, selected_model[0], self.path_output_classified) )
+            classify_thread = threading.Thread(target=pytorch_classify.main, args= (self.path_extracted, self.selected_model, self.path_output_classified) )
             #pytorch_classify.main(self.path_extracted, selected_model[0], self.path_output_classified)
             classify_thread.start()
         else:
@@ -382,7 +382,8 @@ class usv_gui (QMainWindow):
         """Drop Menu"""
         self.model_dropmenu = QComboBox(self.train_dialog)
         self.model_dropmenu.move(15,50)
-        self.model_dropmenu.addItems(['resnet18','vgg19','alexnet','squeezenet','densenet','googlenet','shufflenet','resnext50_32x4d','inception'])
+        self.model_dropmenu.addItems(['resnet18','resnet34','resnet50','resnet101', 'resnet152','resnext50_32x4d',
+                                     'vgg19','alexnet','squeezenet','densenet','googlenet','inception'])
         self.model_dropmenu.currentIndexChanged.connect(self.model_index_change)
 
         cancel_button = QPushButton("Cancel", self.train_dialog)
@@ -427,7 +428,7 @@ class usv_gui (QMainWindow):
 
         """Setting up Model Name"""
 
-        self.source_model_name = QLineEdit(self.train_dialog)
+        self.source_model_name = QLineEdit('resnet18',self.train_dialog)
         self.source_model_name.move(170,140)
         self.source_model_name.setMaximumSize(400,20)
         self.source_model_name.setMinimumSize(400,20)
@@ -453,7 +454,8 @@ class usv_gui (QMainWindow):
         self.learning_rate = 0.0001
         self.epochs=10
         self.model_run_status = False
-
+        self.selected_model_name = 'resnet18'
+        self.model_name ='resnet18'
         self.train_dialog.exec_()
 
 
