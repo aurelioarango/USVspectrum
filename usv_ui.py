@@ -1,11 +1,12 @@
 """Importing QT UI TOOLS"""
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, \
     QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox, QDialog, QDialogButtonBox, \
-    QLineEdit, QDoubleSpinBox, QSpinBox
+    QLineEdit, QDoubleSpinBox, QSpinBox, QSizePolicy
 
 from PyQt5.QtGui import QPixmap, QIcon, QTextLine
 from PyQt5 import QtWidgets
 import PyQt5.QtCore as QtCore
+from PyQt5.QtCore import Qt
 
 """Importing System Tools"""
 
@@ -58,23 +59,21 @@ class usv_gui (QMainWindow):
         self.glayout = QGridLayout()
         self.label = QLabel()
         self.fnames=None
-        pixmap = QPixmap('test_image.png')
+        self.pixmap = QPixmap('unsplash_rat.jpg')
 
 
-        self.load_button = QPushButton('Load')
-        self.start_button = QPushButton('Start')
+        #self.pixmap.scaled(1000,1000, Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
+
         self.previous_button = QPushButton('Previous')
         self.next_button = QPushButton('Next')
 
-        self.load_button.setStyleSheet(style)
-        self.start_button.setStyleSheet(style)
         self.previous_button.setStyleSheet(style)
         self.next_button.setStyleSheet(style)
 
+        self.label.setPixmap(self.pixmap)
+        self.label.setScaledContents(True)
+        self.label.setSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
 
-        self.list = QListWidget()
-        self.combobox = QComboBox()
-        self.label.setPixmap(pixmap)
         #self.setPalette(self.palet)
         self.resize(1000, 750)
 
@@ -84,18 +83,20 @@ class usv_gui (QMainWindow):
         """"-------------- POSITION ------------------"""
         #self.label.move(500, 300)
         self.label.move(100,100)
-        self.list.move(100, 100)
+        #self.list.move(100, 100)
 
-        self.combobox.setMaximumSize(100, 25)
+        #self.combobox.setMaximumSize(100, 25)
         self.label.setMinimumSize(500,500)
+        self.label.setMaximumSize(500,500)
+        #self.label.pixmap().scaled(500,500,Qt.IgnoreAspectRatio,Qt.FastTransformation)
 
-        self.list.setMaximumSize(500,500)
-        self.load_button.setMaximumSize(100, 25)
-        self.start_button.setMaximumSize(100, 25)
+        #self.list.setMaximumSize(500,500)
+        #self.load_button.setMaximumSize(100, 25)
+        #self.start_button.setMaximumSize(100, 25)
 
         """"-------------- CONNECT BUTTON ------------------"""
-        self.load_button.clicked.connect(self.open_folder)
-        self.start_button.clicked.connect(self.process_file)
+        #self.load_button.clicked.connect(self.open_folder)
+        #self.start_button.clicked.connect(self.process_file)
 
         self.previous_button.clicked.connect(self.previous_image)
         self.next_button.clicked.connect(self.next_image)
@@ -103,7 +104,7 @@ class usv_gui (QMainWindow):
 
         """"-------------- ADD WIDGETS ------------------"""
 
-        self.combobox.addItems(["Multiple", "Single"])
+        #
 
         #self.hlayout.addWidget(self.list)
 
@@ -116,23 +117,26 @@ class usv_gui (QMainWindow):
         self.setWindowTitle("USVSpectrum")
         self.setWindowOpacity(50)
 
-        self.list.setStyleSheet("background: grey;")
+        #self.list.setStyleSheet("background: grey;")
 
-        self.glayout.addWidget(self.list, 0, 0, 5, 5)
-        #self.glayout.addItem(verticalSpacer)
-        self.glayout.addWidget(self.label, 0, 5, 5, 5 )
+        #self.glayout.addWidget(self.list, 0, 0, 5, 3)
+        # self.glayout.addItem(verticalSpacer)
+        self.glayout.addWidget(self.label, 0, 5, 5, 5)
 
-        self.glayout.addWidget(self.combobox,9,0 )
+        #self.glayout.addWidget(self.combobox, 9, 0)
 
         """Buttons Postions"""
 
-        self.glayout.addWidget(self.load_button, 9, 2)
-        self.glayout.addWidget(self.start_button, 9, 3)
+        #self.glayout.addWidget(self.load_button, 9, 2)
+        #self.glayout.addWidget(self.start_button, 9, 3)
         self.glayout.addWidget(self.previous_button, 9, 6)
         self.glayout.addWidget(self.next_button, 9, 8)
 
         self.spacer = QSpacerItem(20,20)
-        self.glayout.addItem(self.spacer,10,0 )
+        self.glayout.addItem(self.spacer, 10, 0)
+        self.glayout.addItem(self.spacer, 0, 11, 1, 5)
+        self.glayout.addItem(self.spacer,0,0,1,3)
+        #self.glayout.addItem()
 
         """Need to add other buttons"""
 
@@ -169,15 +173,18 @@ class usv_gui (QMainWindow):
         exitAction.setStatusTip("Exit Application")
 
         selectSurceAction = QAction(QIcon('new.png'), 'Open View Source', self)
+        extracAction = QAction(QIcon('new.png'), 'Extract Images', self)
 
         """"-------------- CONNECT MENU ITEMS ------------------"""
         selectSurceAction.triggered.connect(self.select_view_folder)
+        extracAction.triggered.connect(self.show_image_extract_dialog)
 
         trainAction.triggered.connect(self.train_model)
         retrainAction.triggered.connect(self.retrain_model)
         exitAction.triggered.connect(self.close)
 
         classifyAction.triggered.connect(self.classify_data)
+
 
 
         self.main_menu = self.menuBar()
@@ -191,6 +198,7 @@ class usv_gui (QMainWindow):
         """Adding to File Menu"""
         filemenu.addAction(exitAction)
         filemenu.addAction(selectSurceAction)
+        filemenu.addAction(extracAction)
         """Adding to Train Menu"""
         trainmenu.addAction(trainAction)
         trainmenu.addAction(retrainAction)
@@ -359,6 +367,7 @@ class usv_gui (QMainWindow):
             self.path_output_classified = self.path + '\\output'
             self.path_models = self.path + '\\usv_models'
             self.path_scripts = self.path + '\\scripts'
+            self.path_audio = self.path + '\\audio'
         else:
             self.path_images = self.path+'/usv_images'
             self.path_extracted = self.path+'/usv_images/extracted/'
@@ -366,12 +375,49 @@ class usv_gui (QMainWindow):
             self.path_output_classified = self.path + '/output'
             self.path_models = self.path+'/usv_models'
             self.path_scripts = self.path+'/scripts'
+            self.path_audio = self.path + '/audio'
 
         """Verify And/Or Create Directories"""
         pathlib.Path(self.path_images).mkdir(parents=True, exist_ok=True)
         pathlib.Path(self.path_extracted).mkdir(parents=True, exist_ok=True)
         pathlib.Path(self.path_classified).mkdir(parents=True, exist_ok=True)
         pathlib.Path(self.path_models).mkdir(parents=True, exist_ok=True)
+
+    def show_image_extract_dialog(self):
+        """Create dialog to extract data"""
+        print("Show dialog")
+        self.extract_dialog = QDialog()
+        self.extract_dialog.setWindowTitle("Extract Images Window")
+        self.extract_dialog.setMaximumSize(600, 300)
+        self.extract_dialog.setMinimumSize(600, 300)
+
+        self.extract_dialog_list = QListWidget(self.extract_dialog)
+        self.extract_dialog_list.setMinimumSize(560,200)
+        self.extract_dialog_combobox = QComboBox(self.extract_dialog)
+        self.extract_dialog_dir_line = QLineEdit(self.path_audio,self.extract_dialog)
+
+        self.extract_dialog_select_dir_button = QPushButton('Directory',self.extract_dialog)
+        self.extract_dialog_extract_button = QPushButton('Extract', self.extract_dialog)
+        self.extract_dialog_cancel_button = QPushButton('Cancel', self.extract_dialog)
+
+        """Element Position"""
+        self.extract_dialog_select_dir_button.move(15,15)
+        self.extract_dialog_dir_line.move(110, 20)
+        self.extract_dialog_list.move(20,50)
+        self.extract_dialog_combobox.move(250,265)
+        self.extract_dialog_cancel_button.move(15,265)
+        self.extract_dialog_extract_button.move(500,265)
+
+        """Set up"""
+        #self.extract_dialog_dir_line.text()
+        self.extract_dialog_dir_line.setMinimumSize(470,20)
+        self.extract_dialog_combobox.addItems(["Multiple", "Single"])
+
+        """Connect combo box"""
+
+        self.extract_dialog.exec()
+    def extract_select_directory(self):
+        """Select Audio Diectory"""
 
     def show_train_dialog(self):
         """Create Train Dialog"""

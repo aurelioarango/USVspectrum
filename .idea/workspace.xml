@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="42f0b61b-cf93-490a-9dc7-782329a8a1d5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/predictions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/pytorch/transfer_learning.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/pytorch/transfer_learning.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usv_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/usv_ui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,11 +13,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/usv_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="388" column="64" lean-forward="true" selection-start-line="388" selection-start-column="64" selection-end-line="388" selection-end-column="64" />
+            <state relative-caret-position="817">
+              <caret line="417" column="31" lean-forward="true" selection-start-line="417" selection-start-column="31" selection-end-line="417" selection-end-column="31" />
+              <folding>
+                <element signature="e#28#283#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/pytorch/transfer_learning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="146" column="40" selection-start-line="146" selection-start-column="40" selection-end-line="146" selection-end-column="40" />
+            <state relative-caret-position="583">
+              <caret line="134" column="38" selection-start-line="133" selection-start-column="55" selection-end-line="134" selection-end-column="38" />
               <folding>
                 <element signature="e#65#77#0" expanded="true" />
               </folding>
@@ -113,6 +114,8 @@
       <find>pytorch_classify</find>
       <find>transfer_learning</find>
       <find>selected_model</find>
+      <find>label</find>
+      <find>load_button</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -145,9 +148,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="655" />
-    <option name="y" value="47" />
-    <option name="width" value="1303" />
+    <option name="x" value="879" />
+    <option name="y" value="46" />
+    <option name="width" value="1078" />
     <option name="height" value="1025" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -156,7 +159,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -197,6 +199,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -318,15 +321,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="655" y="47" width="1303" height="1025" extended-state="0" />
+    <frame x="879" y="46" width="1078" height="1025" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1848674" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22421949" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.28510183" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28510183" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39764202" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -386,7 +389,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/usv_ui.py</url>
-          <line>344</line>
+          <line>352</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
@@ -414,6 +417,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="83" column="48" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/ui_elements/classifying_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -451,26 +461,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/ui_elements/classifying_settings.py">
+    <entry file="file://$PROJECT_DIR$/scripts/pytorch/transfer_learning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
+        <state relative-caret-position="583">
+          <caret line="134" column="38" selection-start-line="133" selection-start-column="55" selection-end-line="134" selection-end-column="38" />
+          <folding>
+            <element signature="e#65#77#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/usv_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="388" column="64" lean-forward="true" selection-start-line="388" selection-start-column="64" selection-end-line="388" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/pytorch/transfer_learning.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="146" column="40" selection-start-line="146" selection-start-column="40" selection-end-line="146" selection-end-column="40" />
+        <state relative-caret-position="817">
+          <caret line="417" column="31" lean-forward="true" selection-start-line="417" selection-start-column="31" selection-end-line="417" selection-end-column="31" />
           <folding>
-            <element signature="e#65#77#0" expanded="true" />
+            <element signature="e#28#283#0" expanded="true" />
           </folding>
         </state>
       </provider>
