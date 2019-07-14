@@ -12,3 +12,6 @@ models_extra/
 *.PNG
 #
 *.py[cod]
+# Ignore audio files
+*.wav
+*.WAV
