@@ -1,7 +1,7 @@
 """Importing QT UI TOOLS"""
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, \
     QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox, QDialog, QDialogButtonBox, \
-    QLineEdit, QDoubleSpinBox, QSpinBox, QSizePolicy
+    QLineEdit, QDoubleSpinBox, QSpinBox, QSizePolicy, QAbstractItemView
 
 from PyQt5.QtGui import QPixmap, QIcon, QTextLine
 from PyQt5 import QtWidgets
@@ -31,6 +31,7 @@ else:
 import transfer_learning
 import pytorch_classify
 import glob
+import io
 
 """Install matlab engine for python
 https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html
@@ -43,6 +44,13 @@ conda install matlab_engine
 
 
 """
+
+import importlib
+matlab_spec = importlib.util.find_spec("matlab")
+matlab_found = matlab_spec is not True
+
+if matlab_found:
+    import matlab.engine
 
 class usv_gui (QMainWindow):
     def __init__(self, parent=None):
@@ -171,6 +179,8 @@ class usv_gui (QMainWindow):
         self.setup_environment()
 
         #app.exec_()
+
+
 
     def menu_bar(self):
 
@@ -393,11 +403,24 @@ class usv_gui (QMainWindow):
         self.extract_dialog_dir_line.setMinimumSize(470,20)
         self.extract_dialog_combobox.addItems(["Single","Multiple", "All"])
 
-        """Connect combo box"""
+
+        """Connect items"""
         self.extract_dialog_select_dir_button.clicked.connect(self.extract_select_directory)
         self.extract_dialog_extract_button.clicked.connect(self.extract_images_from_file)
+        self.extract_dialog_combobox.currentIndexChanged.connect(self.extract_dialog_on_change_combobox)
+
 
         self.extract_dialog.exec()
+
+    def extract_dialog_on_change_combobox(self):
+
+        if self.extract_dialog_combobox.currentText() == "Single":
+            self.extract_dialog_list.setSelectionMode(QAbstractItemView.SingleSelection)
+        elif self.extract_dialog_combobox.currentText() == "Multiple":
+            self.extract_dialog_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
+
+
+
     def extract_select_directory(self):
 
         self.fnames = QFileDialog.getOpenFileNames(self,'Open Folder', self.path, "USV file(s) (*.wav *WAV)")
@@ -410,7 +433,10 @@ class usv_gui (QMainWindow):
             """Select Audio Diectory"""
             print(self.extract_dialog_list)
 
+        self.extract_dialog_list.setCurrentRow(0)
     def extract_images_from_file(self):
+        """Run Matlab to extract images"""
+
 
         if self.fnames != None :
 
@@ -420,47 +446,88 @@ class usv_gui (QMainWindow):
             print(os.getcwd())
             """----------------------------------- Run All USV Files From A Single Folder"""
             #if self.extract_dialog_combobox.currentIndex() == 0:
+            command=""
+            files_name=[]
+            folder_path=""
+            list_audio_files =[]
+            mode =""
+
             if self.extract_dialog_combobox.currentText() == "Single":
+                print("single")
+                mode="Single"
                 #for x in self.fnames[0]:
-                path = self.extract_dialog_list.currentIndex().data()+""
+                path = self.extract_dialog_list.currentItem().text()
                 last_of_index = path.rfind("/")
                 folder_path = path[:last_of_index]
-                print(folder_path)
-                command = "process_rusv(\"" + folder_path + "\",\"all\");exit;"
+                files_name  = path[last_of_index+1:]+""
+                #print(folder_path)
 
+                if matlab_found:
+                    command ="(\""+ folder_path + "\",\""+files_name +"\", \"Single\")"
+                else:
+                    command = "process_rusv(\"" + folder_path + "\","+files_name +", \"Single\");exit;"
+
+                print("command single: ",command)
                 #subprocess.run(["matlab", "-nodesktop", "-nosplash", "-r", command])
                 #print(x)
 
             #"""-----------------Implement Single Case in Matlab------------------------"""
 
             #elif self.extract_dialog_combobox.currentIndex() == 1:
-            elif self.extract_dialog_combobox.currentText() == "Mutiple":
-                path = self.extract_dialog_list.currentIndex().data()
-                last_of_index = path.rfind("/")
-                file_name = path[last_of_index+1:]
-                folder_path = path[:last_of_index]
+            elif self.extract_dialog_combobox.currentText() == "Multiple" or \
+                 self.extract_dialog_combobox.currentText() == "All" :
+                print("multiple | all")
 
-                command = "process_rusv(\"" + folder_path + "\",\"" + file_name+"\" );exit;"
+                #path = self.extract_dialog_list.currentItem().text()
+
+
+                if self.extract_dialog_combobox.currentText() == "Multiple":
+                    mode = "Multiple"
+                    items = self.extract_dialog_list.selectedItems()
+                    for i in range (len(items)):
+                        list_audio_files.append(items[i].text())
+
+                elif self.extract_dialog_combobox.currentText() == "All":
+                    mode = "All"
+                    for i in range(self.extract_dialog_list.count()):
+                        """Add items to te list"""
+                        # print(self.)
+                        list_audio_files.append(self.extract_dialog_list.item(i).text())
+
+                for i in range(len (list_audio_files)):
+                    path = list_audio_files[0]
+                    last_of_index = path.rfind("/")
+                    folder_path = path[:last_of_index]
+                    if i == 0:
+                        files_name = path[last_of_index+1:]
+                    else:
+                        files_name+=","+path[last_of_index + 1:]
+
+                print(files_name)
+
+            if matlab_found:
+                print("Matlab module found")
+                eng = matlab.engine.start_matlab("-nodesktop -nosplash ")
+                eng.addpath(self.path_matlab_script)
                 print(command)
+                try:
+                    eng.process_rusv(folder_path,files_name ,mode,nargout=0)
+                except:
+
+                    out = io.StringIO()
+                    err = io.StringIO()
+                    ret = eng.dec2base(2 ** 60, 16, stdout=out, stderr=err)
+                    print(err.getvalue())
+                eng.quit()
+            else:
+                """Run terminal through terminal"""
+                print("Run")
                 #subprocess.run(["matlab", "-nodesktop", "-nosplash", "-r",command])
-                print(self.extract_dialog_list.currentIndex().data())
-
-            elif self.extract_dialog_combobox.currentText() == "All":
-                """"""
-                print("All")
-                list_audio_files =[]
-                #print(self.extract_dialog_list.items())
-                for i in range (self.extract_dialog_list.count()):
-                    """Add items to te list"""
-                    #print(self.)
-
-                    list_audio_files.append(self.extract_dialog_list.item(i).text())
 
 
-                print(list_audio_files)
-
+            """Return to working directory"""
             os.chdir(self.path)
-            print(os.getcwd())
+
 
     def show_train_dialog(self):
         """Create Train Dialog"""
