@@ -16,11 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/usv_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="487" selection-start-line="487" selection-end-line="487" />
-              <folding>
-                <element signature="e#28#296#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="602">
+              <caret line="525" column="47" selection-start-line="525" selection-start-column="47" selection-end-line="525" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -158,8 +155,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="1482" />
-    <option name="width" value="566" />
+    <option name="x" value="1034" />
+    <option name="width" value="1014" />
     <option name="height" value="1152" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -168,7 +165,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -180,6 +176,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -407,6 +404,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/pytorch/lib/python3.7/site-packages/matlab/engine/matlabengine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usv_ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="602">
+          <caret line="525" column="47" selection-start-line="525" selection-start-column="47" selection-end-line="525" selection-end-column="47" />
+          <folding>
+            <element signature="e#28#296#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/classify/pytorch_classify.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -447,30 +468,6 @@
           <caret line="134" column="38" selection-start-line="133" selection-start-column="55" selection-end-line="134" selection-end-column="38" />
           <folding>
             <element signature="e#65#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/pytorch/lib/python3.7/site-packages/matlab/engine/matlabengine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/usv_ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="487" selection-start-line="487" selection-end-line="487" />
-          <folding>
-            <element signature="e#28#296#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -462,14 +462,9 @@ class usv_gui (QMainWindow):
                 files_name  = path[last_of_index+1:]+""
                 #print(folder_path)
 
-                if matlab_found:
-                    command ="(\""+ folder_path + "\",\""+files_name +"\", \"Single\")"
-                else:
-                    command = "process_rusv(\"" + folder_path + "\","+files_name +", \"Single\");exit;"
+                if matlab_found == False:
 
-                print("command single: ",command)
-                #subprocess.run(["matlab", "-nodesktop", "-nosplash", "-r", command])
-                #print(x)
+                    command = "process_rusv(\"" + folder_path + "\","+files_name +", \"Single\");exit;"
 
             #"""-----------------Implement Single Case in Matlab------------------------"""
 
@@ -503,9 +498,12 @@ class usv_gui (QMainWindow):
                     else:
                         files_name+=","+path[last_of_index + 1:]
 
+                if matlab_found == False:
+                    command = "process_rusv(\"" + folder_path + "\"," + files_name + ","+mode+");exit;"
+
                 print(files_name)
 
-            if matlab_found:
+            if matlab_found == False:
                 print("Matlab module found")
                 eng = matlab.engine.start_matlab("-nodesktop -nosplash ")
                 eng.addpath(self.path_matlab_script)
@@ -522,8 +520,11 @@ class usv_gui (QMainWindow):
             else:
                 """Run terminal through terminal"""
                 print("Run")
-                #subprocess.run(["matlab", "-nodesktop", "-nosplash", "-r",command])
+                try:
+                    subprocess.run(["matlab", "-nodesktop", "-nosplash", "-r",command])
 
+                except:
+                    print("Error Finding matlab")
 
             """Return to working directory"""
             os.chdir(self.path)
