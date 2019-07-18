@@ -42,6 +42,9 @@ system('python setup.py install')
 or 
 conda install matlab_engine
 
+Extract Path 
+Mac Sample Path: /Applications/MATLAB_R2019a.app/bin/matlab
+Ubuntu Sample Path: /usr/local/bin/matlab
 
 """
 
@@ -408,9 +411,13 @@ class usv_gui (QMainWindow):
         self.extract_dialog_select_dir_button.clicked.connect(self.extract_select_directory)
         self.extract_dialog_extract_button.clicked.connect(self.extract_images_from_file)
         self.extract_dialog_combobox.currentIndexChanged.connect(self.extract_dialog_on_change_combobox)
-
+        self.extract_dialog_cancel_button.clicked.connect(self.extrac_on_clicked_cancel)
 
         self.extract_dialog.exec()
+    def extrac_on_clicked_cancel(self):
+        self.extract_dialog.close()
+        self.extract_run_status = False
+
 
     def extract_dialog_on_change_combobox(self):
 
@@ -528,7 +535,7 @@ class usv_gui (QMainWindow):
 
             """Return to working directory"""
             os.chdir(self.path)
-
+        self.extract_dialog.close()
 
     def show_train_dialog(self):
         """Create Train Dialog"""
