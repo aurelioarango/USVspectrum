@@ -53,7 +53,10 @@ matlab_spec = importlib.util.find_spec("matlab")
 matlab_found = matlab_spec is not True
 
 if matlab_found:
-    import matlab.engine
+    try:
+        import matlab.engine
+    except:
+        print("No Matlab found")
 
 class usv_gui (QMainWindow):
     def __init__(self, parent=None):
@@ -197,8 +200,11 @@ class usv_gui (QMainWindow):
         exitAction.setShortcut("Ctrl+Q")
         exitAction.setStatusTip("Exit Application")
 
-        selectSurceAction = QAction(QIcon('new.png'), 'Open View Source', self)
+        selectSurceAction = QAction(QIcon('new.png'), 'Open Images', self)
         extracAction = QAction(QIcon('new.png'), 'Extract Images', self)
+
+        runStatsAction = QAction(QIcon('new.png'), 'Single Run Stats', self)
+        dayrunStatsAction = QAction(QIcon('new.png'), 'Day Run', self)
 
         """"-------------- CONNECT MENU ITEMS ------------------"""
         selectSurceAction.triggered.connect(self.select_view_folder)
@@ -216,6 +222,7 @@ class usv_gui (QMainWindow):
         filemenu= self.main_menu.addMenu("&File")
         trainmenu = self.main_menu.addMenu("&Train")
         classify_menu = self.main_menu.addMenu("&Classify")
+        stats_menu = self.main_menu.addMenu("&Statistics")
 
 
         #trainmenu.addMenu("&TrainModel")
@@ -229,6 +236,7 @@ class usv_gui (QMainWindow):
         trainmenu.addAction(retrainAction)
         """Adding to Classify Menu"""
         classify_menu.addAction(classifyAction)
+        stats_menu.addAction(runStatsAction)
 
     def keyPressEvent(self,event):
         key = event.key()
@@ -469,19 +477,9 @@ class usv_gui (QMainWindow):
                 files_name  = path[last_of_index+1:]+""
                 #print(folder_path)
 
-                if matlab_found == False:
-
-                    command = "process_rusv(\"" + folder_path + "\","+files_name +", \"Single\");exit;"
-
-            #"""-----------------Implement Single Case in Matlab------------------------"""
-
-            #elif self.extract_dialog_combobox.currentIndex() == 1:
             elif self.extract_dialog_combobox.currentText() == "Multiple" or \
                  self.extract_dialog_combobox.currentText() == "All" :
                 print("multiple | all")
-
-                #path = self.extract_dialog_list.currentItem().text()
-
 
                 if self.extract_dialog_combobox.currentText() == "Multiple":
                     mode = "Multiple"
@@ -503,20 +501,16 @@ class usv_gui (QMainWindow):
                     if i == 0:
                         files_name = path[last_of_index+1:]
                     else:
-                        files_name+=","+path[last_of_index + 1:]
+                        files_name += ","+path[last_of_index + 1:]
 
-                if matlab_found == False:
-                    command = "process_rusv(\"" + folder_path + "\"," + files_name + ","+mode+");exit;"
-
-                print(files_name)
-
-            if matlab_found:
+            if matlab_found == False:
                 print("Matlab module found")
                 eng = matlab.engine.start_matlab("-nodesktop -nosplash ")
                 eng.addpath(self.path_matlab_script)
                 print(command)
                 try:
-                    eng.process_rusv(folder_path,files_name ,mode,nargout=0)
+                    """ Audio Directory, files passed, Single, multiple, output directory """
+                    eng.process_rusv(folder_path,files_name , self.path_extracted ,nargout=0)
                 except:
 
                     out = io.StringIO()
@@ -526,12 +520,13 @@ class usv_gui (QMainWindow):
                 eng.quit()
             else:
                 """Run terminal through terminal"""
-                print("Run")
-                try:
-                    subprocess.run(["matlab", "-nodesktop", "-nosplash", "-r",command])
+                #print("No Matlab")
+                dialog=QMessageBox()
+                dialog.setText("No Matlab")
+                dialog.setIcon(QMessageBox.Information)
+                dialog.setStandardButtons(QMessageBox.Ok)
 
-                except:
-                    print("Error Finding matlab")
+                dialog.exec_()
 
             """Return to working directory"""
             os.chdir(self.path)

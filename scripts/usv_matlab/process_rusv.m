@@ -15,7 +15,7 @@ function process_rusv(varargin)
     % Check if the correct number of inputs is correct
     if(nargin ~= 3)
         %celldisp(varargin)
-        fprintf('Usage process <Path To Wave files> <file_name(s)> <Single|Multiple|All>\n');
+        fprintf('Usage process <Path To Wave files> <file_name(s)> <Output Dir>\n');
         return;
     else
         %celldisp(varargin)
@@ -27,19 +27,28 @@ end
 %%%
 function main(varargin)
 set(0,'DefaultFigureVisible', 'off')
-curr_dir = pwd;
-image_dir = fullfile(curr_dir, 'images');
+%curr_dir = pwd;
+%image_dir = fullfile(curr_dir, 'images');
 
 
 %cd varargin(1);
 try
     path_wave_dir = varargin{1}{1}
-    files = split(string(varargin{1}{2}),",")
-    file_mode =  varargin{1}{3};
+    temp_files = split(string(varargin{1}{2}),",")
+    image_dir = varargin{1}{3}
 catch
     fprintf("Error")
 end
-fprintf("Files", files)
+files = convertStringsToChars(temp_files)
+
+file_container = containers.Map(files,files)
+%file_container = containers.Map('KeyType','char', 'ValueType','char')
+
+%for i = 1:numel(files)
+%    file_container(files{i})= files(i);
+%end
+
+
 %grab all the files inside the directory
 wave_files = dir (path_wave_dir);
 %wave_files = wave_files(~cellfun('isempty',(regexp(wave_files.name,'\.wav'))))
@@ -69,12 +78,12 @@ end
 %%}
 
 %MAIN LOOP
-%{
+
 images_dir = handles.image_dir;
 for j=1:numel(wave_files)
     %process all files
     
-    handles=process_file(handles,j);
+    handles=process_file(handles,j)
     
     
     %handles
@@ -89,16 +98,16 @@ for j=1:numel(wave_files)
     
     sub_dir = strcat(sub_dir, handles.datetime);
     %fprintf(sub_dir);
-    
+    %if subdir (File name) == File name needed
     mkdir('images', sub_dir);
     handles.image_dir = fullfile(images_dir, sub_dir);
 
     for i=1:(handles.num_elements)
-		write_syllables(handles,i);
+		%write_syllables(handles,i);
         %show_syllables(handles,i);
     end
 end
-%}
+
 
 %handles
 %
