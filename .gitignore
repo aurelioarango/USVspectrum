@@ -15,3 +15,5 @@ models_extra/
 # Ignore audio files
 *.wav
 *.WAV
+
+*.mat
