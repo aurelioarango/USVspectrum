@@ -26,22 +26,22 @@ end
 %%% Main Program
 %%%
 function main(varargin)
-set(0,'DefaultFigureVisible', 'off')
+set(0,'DefaultFigureVisible', 'off');
 %curr_dir = pwd;
 %image_dir = fullfile(curr_dir, 'images');
 
 
 %cd varargin(1);
 try
-    path_wave_dir = varargin{1}{1}
-    temp_files = split(string(varargin{1}{2}),",")
-    image_dir = varargin{1}{3}
+    path_wave_dir = varargin{1}{1};
+    temp_files = split(string(varargin{1}{2}),",");
+    image_dir = varargin{1}{3};
 catch
-    fprintf("Error")
+    fprintf("Error");
 end
-files = convertStringsToChars(temp_files)
+files = convertStringsToChars(temp_files);
 
-file_container = containers.Map(files,files)
+file_container = containers.Map(files,files);
 %file_container = containers.Map('KeyType','char', 'ValueType','char')
 
 %for i = 1:numel(files)
@@ -81,30 +81,32 @@ end
 
 images_dir = handles.image_dir;
 for j=1:numel(wave_files)
-    %process all files
     
-    handles=process_file(handles,j)
+    %Check if the item is on the list to process
+    if handles.flist{j}
     
-    
-    %handles
-    [rows, elements]=size(handles.syllable_data);
-    handles.num_elements = elements;
-    %process each syllable
+        handles=process_file(handles,j);
 
-    sub_dir = extractBefore(handles.filename,'.WAV');
-    %fprintf(sub_dir);
+        %handles
+        [rows, elements]=size(handles.syllable_data);
+        handles.num_elements = elements;
+        %process each syllable
     
-    %handles.datetime = char (datetime("now", 'Format', '_MMdyHHmmss' ));
-    
-    sub_dir = strcat(sub_dir, handles.datetime);
-    %fprintf(sub_dir);
-    %if subdir (File name) == File name needed
-    mkdir('images', sub_dir);
-    handles.image_dir = fullfile(images_dir, sub_dir);
+        sub_dir = extractBefore(handles.filename,'.WAV');
+        %fprintf(sub_dir);
 
-    for i=1:(handles.num_elements)
-		%write_syllables(handles,i);
-        %show_syllables(handles,i);
+        %handles.datetime = char (datetime("now", 'Format', '_MMdyHHmmss' ));
+
+        sub_dir = strcat(sub_dir, handles.datetime);
+        %fprintf(sub_dir);
+        %if subdir (File name) == File name needed
+        mkdir('images', sub_dir);
+        handles.image_dir = fullfile(images_dir, sub_dir);
+
+        for i=1:(handles.num_elements)
+            %write_syllables(handles,i);
+            %show_syllables(handles,i);
+        end
     end
 end
 
@@ -833,7 +835,7 @@ function [syllable_data, syllable_stats, filestats, fs] = syllable_activity_file
     else
         if isempty(syllable_use)
             %syllable_use=ones(1,length(syllable_data))
-            syllable_use= ones(1,size(syllable_data,2 ))
+            syllable_use= ones(1,size(syllable_data,2 ));
         end
     end
     fprintf('Updating stats of file %s.\n', filename);

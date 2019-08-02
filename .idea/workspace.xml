@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42f0b61b-cf93-490a-9dc7-782329a8a1d5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/usv_matlab/process_rusv.m" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/usv_matlab/process_rusv.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usv_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/usv_ui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,20 +14,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/usv_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="524" column="43" selection-start-line="524" selection-start-column="43" selection-end-line="524" selection-end-column="43" />
+            <state relative-caret-position="425">
+              <caret line="565" column="51" lean-forward="true" selection-start-line="565" selection-start-column="51" selection-end-line="565" selection-end-column="51" />
+              <folding>
+                <element signature="e#28#315#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+            <state relative-caret-position="323">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/usv_matlab/process_rusv.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="463">
+              <caret line="111" selection-start-line="111" selection-end-line="111" />
             </state>
           </provider>
         </entry>
@@ -96,15 +110,16 @@
         <option value="$PROJECT_DIR$/scripts/ui_elements/classifying_settings.py" />
         <option value="$PROJECT_DIR$/scripts/classify/TestImageModel.py" />
         <option value="$PROJECT_DIR$/scripts/pytorch/transfer_learning.py" />
-        <option value="$PROJECT_DIR$/usv_ui.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/scripts/usv_matlab/process_rusv.m" />
+        <option value="$PROJECT_DIR$/usv_ui.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="690" />
-    <option name="y" value="25" />
-    <option name="width" value="1290" />
+    <option name="x" value="781" />
+    <option name="y" value="44" />
+    <option name="width" value="1267" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -113,6 +128,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -135,7 +151,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -257,21 +272,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="690" y="25" width="1290" height="1050" extended-state="0" />
+    <frame x="781" y="44" width="1267" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16233255" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16532905" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2776618" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2776618" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3974122" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32809612" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.20062695" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3810021" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3810021" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50058824" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49941176" weight="0.32936078" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -411,22 +426,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/usv_matlab/process_rusv.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/usv_ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="524" column="43" selection-start-line="524" selection-start-column="43" selection-end-line="524" selection-end-column="43" />
+        <state relative-caret-position="463">
+          <caret line="111" selection-start-line="111" selection-end-line="111" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        <state relative-caret-position="323">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usv_ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="565" column="51" lean-forward="true" selection-start-line="565" selection-start-column="51" selection-end-line="565" selection-end-column="51" />
+          <folding>
+            <element signature="e#28#315#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,7 +1,7 @@
 """Importing QT UI TOOLS"""
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, \
     QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox, QDialog, QDialogButtonBox, \
-    QLineEdit, QDoubleSpinBox, QSpinBox, QSizePolicy, QAbstractItemView
+    QLineEdit, QDoubleSpinBox, QSpinBox, QSizePolicy, QAbstractItemView, QTextEdit
 
 from PyQt5.QtGui import QPixmap, QIcon, QTextLine
 from PyQt5 import QtWidgets
@@ -92,6 +92,8 @@ class usv_gui (QMainWindow):
 
         self.previous_button = QPushButton('Previous')
         self.next_button = QPushButton('Next')
+        self.previous_button.setMinimumSize(100,25)
+        self.next_button.setMinimumSize(100,25)
 
         self.previous_button.setStyleSheet(style)
         self.next_button.setStyleSheet(style)
@@ -127,17 +129,46 @@ class usv_gui (QMainWindow):
         self.previous_button.clicked.connect(self.previous_image)
         self.next_button.clicked.connect(self.next_image)
 
+        """------------ ADD Display fields ------------"""
+        self.main_file_name = QLineEdit()
+        self.main_file_number = QLineEdit()
+        self.main_file_duration = QLineEdit()
+        self.main_file_average_frequency = QLineEdit()
+        self.main_file_max_frequency = QLineEdit()
+        self.main_file_min_frequency = QLineEdit()
 
-        """"-------------- ADD WIDGETS ------------------"""
+        self.main_file_name.setMaximumSize(200,20)
+        self.main_file_number.setMaximumSize(200,20)
+        self.main_file_duration.setMaximumSize(200,20)
+        self.main_file_average_frequency.setMaximumSize(200,20)
+        self.main_file_max_frequency.setMaximumSize(200, 20)
+        self.main_file_min_frequency.setMaximumSize(200,20)
 
-        #
+        qline_style = "QLineEdit { background: #F0F8FF }"
+        self.main_file_name.setStyleSheet(qline_style)
+        self.main_file_number.setStyleSheet(qline_style)
+        self.main_file_duration.setStyleSheet(qline_style)
+        self.main_file_average_frequency.setStyleSheet(qline_style)
+        self.main_file_max_frequency.setStyleSheet(qline_style)
+        self.main_file_min_frequency.setStyleSheet(qline_style)
 
-        #self.hlayout.addWidget(self.list)
+        self.main_file_name.setReadOnly(True)
+        self.main_file_number.setReadOnly(True)
+        self.main_file_duration.setReadOnly(True)
+        self.main_file_average_frequency.setReadOnly(True)
+        self.main_file_max_frequency.setReadOnly(True)
+        self.main_file_min_frequency.setReadOnly(True)
 
-        #self.hlayout.addWidget(self.label,Qt.AlignRight)
-        #self.vlayout.addWidget(self.combobox)
-        #self.vlayout.addWidget(self.load_button)
-        #self.vlayout.addWidget(self.start_button)
+
+        """-------------- ADD Labels ------------------"""
+
+        label_file_name = QLabel("File Name:")
+        label_call_number = QLabel("Call Number: ")
+        label_duration = QLabel("Duration: ")
+        label_frequency = QLabel("Average Freq: ")
+        label_max_frequency = QLabel("Max Frequency: ")
+        label_min_frequency = QLabel("Min Frequency: ")
+
 
         """"-------------- SET WINDOW ------------------"""
         self.setWindowTitle("USVSpectrum")
@@ -147,7 +178,7 @@ class usv_gui (QMainWindow):
 
         #self.glayout.addWidget(self.list, 0, 0, 5, 3)
         # self.glayout.addItem(verticalSpacer)
-        self.glayout.addWidget(self.label, 0, 5, 5, 5)
+        self.glayout.addWidget(self.label, 0, 2, 10, 10)
 
         #self.glayout.addWidget(self.combobox, 9, 0)
 
@@ -155,21 +186,34 @@ class usv_gui (QMainWindow):
 
         #self.glayout.addWidget(self.load_button, 9, 2)
         #self.glayout.addWidget(self.start_button, 9, 3)
-        self.glayout.addWidget(self.previous_button, 9, 6)
-        self.glayout.addWidget(self.next_button, 9, 8)
+        self.glayout.addWidget(self.previous_button, 10, 5)
+        self.glayout.addWidget(self.next_button, 10, 7)
 
         self.spacer = QSpacerItem(20,20)
-        self.glayout.addItem(self.spacer, 10, 0)
+        self.glayout.addItem(self.spacer, 11, 0)
         self.glayout.addItem(self.spacer, 0, 11, 1, 5)
         self.glayout.addItem(self.spacer,0,0,1,3)
+
+        self.glayout.addWidget(label_file_name, 1, 13, 1, 1)
+        self.glayout.addWidget(label_call_number, 2, 13, 1, 1)
+        self.glayout.addWidget(label_duration, 3, 13, 1, 1)
+        self.glayout.addWidget(label_frequency, 4, 13, 1, 1)
+        self.glayout.addWidget(label_min_frequency, 5, 13, 1, 1)
+        self.glayout.addWidget(label_max_frequency, 6, 13, 1, 1)
+
+        self.glayout.addWidget(self.main_file_name, 1, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_number, 2, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_duration, 3, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_average_frequency, 4, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_min_frequency, 5, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_max_frequency, 6, 14, 1, 1)
+
         #self.glayout.addItem()
 
         """Need to add other buttons"""
 
         """--------------------------------Adding place holder for Stats to the Screen------------------------------"""
-        label_detection = QLabel("Detected: ")
-        label_frequency = QLabel("Average Freq: ")
-        label_duration = QLabel("Duration: ")
+
         """Adding stats label"""
         #self.glayout.addWidget(label_detection, 1, 1)
         #self.glayout.addWidget(label_frequency, 2, 1)
