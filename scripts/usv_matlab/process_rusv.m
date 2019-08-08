@@ -102,9 +102,10 @@ for j=1:numel(wave_files)
         %if subdir (File name) == File name needed
         mkdir('images', sub_dir);
         handles.image_dir = fullfile(images_dir, sub_dir);
-
+        transpose(handles.syllable_data)
+        
         for i=1:(handles.num_elements)
-            %write_syllables(handles,i);
+            write_syllables(handles,i);
             %show_syllables(handles,i);
         end
     end
@@ -1048,7 +1049,7 @@ function write_syllables(handles, syllable_ndx)
     colormap gray;
     
     
-
+    handles.syllable_data
     filename = fullfile(handles.image_dir,img_filename );
     imwrite(syllable_patch_fft_dB, filename);
 

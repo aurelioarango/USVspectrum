@@ -547,7 +547,7 @@ class usv_gui (QMainWindow):
                     else:
                         files_name += ","+path[last_of_index + 1:]
 
-            if matlab_found == False:
+            if matlab_found:
                 print("Matlab module found")
                 eng = matlab.engine.start_matlab("-nodesktop -nosplash ")
                 eng.addpath(self.path_matlab_script)
