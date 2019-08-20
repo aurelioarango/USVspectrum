@@ -142,7 +142,7 @@ class usv_gui (QMainWindow):
         self.main_file_date = QLineEdit()
         self.main_file_experimenter = QLineEdit()
         self.main_file_details = QLineEdit()
-
+git
         self.main_file_name.setMaximumSize(200,20)
         self.main_file_number.setMaximumSize(200,20)
         self.main_file_treatment.setMaximumSize(200,20)
