@@ -17,3 +17,5 @@ models_extra/
 *.WAV
 
 *.mat
+*.LOG
+*.log

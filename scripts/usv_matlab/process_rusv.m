@@ -63,24 +63,15 @@ handles.flist = handles.flist.';
 handles.image_dir = image_dir;
 
 
-%create loop to traverse files
-
-%check if dir exist otherwise make one
-%%{
-%dir_status = exist ('images')
-if ~ exist('images', 'dir')
-    fprintf('Creating images directory');
-    mkdir ('images');
-else
-    fprintf('Exists \n');
-end
-
-%%}
-
 %MAIN LOOP
 
 images_dir = handles.image_dir;
-for j=1:numel(wave_files)
+
+%for member = files
+%    disp(['the member is ' member])
+%end
+
+for j=1:numel(handles.flist)
     
     %Check if the item is on the list to process
     if handles.flist{j}
@@ -100,10 +91,18 @@ for j=1:numel(wave_files)
         sub_dir = strcat(sub_dir, handles.datetime);
         %fprintf(sub_dir);
         %if subdir (File name) == File name needed
-        mkdir('images', sub_dir);
+        %mkdir('images', sub_dir);
         handles.image_dir = fullfile(images_dir, sub_dir);
-        transpose(handles.syllable_data)
+        transpose(handles.syllable_data);
         
+        %%%% Creating directory
+        if ~ exist(handles.image_dir, 'dir')
+            disp( handles.image_dir)
+            mkdir( handles.image_dir)
+        else
+            fprintf("exists")
+        end
+
         for i=1:(handles.num_elements)
             write_syllables(handles,i);
             %show_syllables(handles,i);
@@ -112,20 +111,6 @@ for j=1:numel(wave_files)
 end
 
 
-%handles
-%
-%{
-%process each file for usv extraction
-for i=1:numel(wave_files)
-    %only process wave files
-    if contains(wave_files(i).name, '.wav')
-        %fprintf("%d ",i);
-        %compute_usv(dir_path,wavefile);
-    end
-end
-%}
-%fprinf(wavefile_1)
-% show_syllables
 end
 
 %%%
@@ -1047,121 +1032,20 @@ function write_syllables(handles, syllable_ndx)
 
 
     colormap gray;
+    %img_filename
     
-    
-    handles.syllable_data
+    %handles.syllable_data
     filename = fullfile(handles.image_dir,img_filename );
+    %filename
+    
+    %if exist(filename, 'dir')
+    %    fprintf(filename)
+    %else
+    %    mkdir('parentFolder', filename)
+    %end
+    %fprintf("filename: ",filename)
+    %fprintf("imgfilename: ", img_filename)
     imwrite(syllable_patch_fft_dB, filename);
-
-end
-
-% show_syllables
-function show_syllables(handles,syllable_ndx)
-
-
-    % make syllable patch
-    syllable_gt = handles.syllable_data{2,syllable_ndx};
-    syllable_duration=size(syllable_gt,2);
-    syllable_patch_window=max(handles.patch_window,ceil(syllable_duration/2)*2);
-    %syllable_patch_gt = ones(size(syllable_gt,1), syllable_patch_window);
-    syllable_patch_gt = zeros(size(syllable_gt,1), syllable_patch_window);
-    syllable_patch_window_start=floor(syllable_patch_window/2)-floor(syllable_duration/2);
-    syllable_patch_gt(:, syllable_patch_window_start+1:syllable_patch_window_start+syllable_duration) = syllable_gt;
-    syllable_fft = handles.syllable_data{3,syllable_ndx};
-
-    syllable_fft_median=median(syllable_fft(:));
-    syllable_fft_median=2*syllable_fft_median;
-    %random_num = 0.0000017;
-    %random_num = -15.5;
-    %syllable_patch_fft = syllable_fft_median*ones(size(syllable_fft,1), syllable_patch_window);
-
-    syllable_patch_fft = syllable_fft_median * rand(size(syllable_fft,1), syllable_patch_window);
-
-    %syllable_patch_fft = random_num * syllable_patch_fft;%Adding noise
-
-    syllable_duration=size(syllable_fft,2);
-
-    syllable_patch_fft(:, syllable_patch_window_start+1:syllable_patch_window_start+syllable_duration) = syllable_fft;
-
-    %syllable_patch_window_start; % this is the position start of the call
-    %syllable_duration; % this is the call duration
-
-    %syllable_fft_median
-    %_le
-    %fprintf("processing Images \n ");
-    % fft figure
-    %axes(handles.syllable_axes_fft);
-    syllable_patch_fft_dB=10*log10(abs(syllable_patch_fft(1:2:end,:)+1e-5)); % in dB
-    %syllable_patch_fft
-
-    %fft_range_db1=-95;
-
-    fft_range_db1_min=-50;
-    fft_range_db2=0;
-    fft_peak_db=handles.syllable_stats{12,syllable_ndx};
-    fft_range=[fft_range_db1_min , fft_peak_db+fft_range_db2];
-    %fft_peak_db
-    %syllable_patch_fft_dB; % image
-    %fft_range
-
-    imagesc(syllable_patch_fft_dB,fft_range);
-    axis xy;
-    colorbar;
-
-
-    colormap jet;
-    %colormap hot;
-
-     %----------writing syllable to png file ------------%
-
-    [pathstr, name, ext] = fileparts(handles.filename);
-    img_filename = sprintf('%s_%d.png',name, syllable_ndx);
-
-
-
-
-    %-----------end of writing image to file ------------%
-
-    %size(syllable_patch_fft_dB,1)/5:size(syllable_patch_fft_dB,1);
-    set(gca,'YTick',[0:size(syllable_patch_fft_dB,1)/5:size(syllable_patch_fft_dB,1)]) % FFT bands
-    set(gca,'YTickLabel',fix([0:handles.sample_frequency/2/5:handles.sample_frequency/2]/1e3)) % FFT bands
-    %set(gca,'XTick',[0:syllable_patch_window/6:syllable_patch_window]) % frequency
-    %set(gca, 'XTickLabel', fix([64]));
-    %set(gca,'XTickLabel',fix([0:handles.frame_shift_ms*syllable_patch_window/6:syllable_patch_window*handles.frame_shift_ms]*1e3)) % frequency
-    set(gca, 'FontSize',11,'FontName','default');
-    %xlabel('Time (milliseconds)','FontSize',11,'FontName','default');
-    ylabel('Frequency [kHz]','FontSize',11,'FontName','default');
-    %title('Sonogram','FontSize',11,'FontName','default','FontWeight','bold');
-    ylim([size(syllable_fft,1)/125000*25000/2 size(syllable_fft,1)/2]);
-    %ylim([size(syllable_fft,1)/100000*30000/2 size(syllable_fft,1)/2]);
-    %ylim([0 250]);
-
-%{
-syll_window = 0;
-
-    if syllable_duration  < 64
-        syll_window = 64 - 5;
-    elseif syllable_duration < 128 && syllable_duration > 64
-        syll_window = 128 - 5;
-    elseif syllable_duration < 256 && syllable_duration > 128
-        syll_window = 256 - 5;
-    elseif syllable_duration < 512 && syllable_duration > 256
-        syll_window = 512 - 5;
-
-    end
-    syll_window
-
-    xlim([syllable_patch_window_start-5 syllable_patch_window_start+syll_window]);%size of 64 x-axis length
-%}
-
-    img = getframe(gca);
-    [usv map_usv] = frame2im(img);
-    %img_size = size(img.cdata)
-    %usv = imsharpen(usv);
-    usv = imresize(usv,[512 512]);
-    %handles
-    filename = fullfile(handles.image_dir,img_filename );
-    imwrite(usv,filename,'png');
 
 end
 

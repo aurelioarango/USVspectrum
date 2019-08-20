@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QGri
     QComboBox, QFileDialog,QListWidget, QSpacerItem, QAction, QMainWindow, QMessageBox, QDialog, QDialogButtonBox, \
     QLineEdit, QDoubleSpinBox, QSpinBox, QSizePolicy, QAbstractItemView, QTextEdit
 
-from PyQt5.QtGui import QPixmap, QIcon, QTextLine
+from PyQt5.QtGui import QPixmap, QIcon, QTextLine, QFont
 from PyQt5 import QtWidgets
 import PyQt5.QtCore as QtCore
 from PyQt5.QtCore import Qt
@@ -131,26 +131,45 @@ class usv_gui (QMainWindow):
 
         """------------ ADD Display fields ------------"""
         self.main_file_name = QLineEdit()
+        self.main_file_treatment = QLineEdit()
         self.main_file_number = QLineEdit()
         self.main_file_duration = QLineEdit()
         self.main_file_average_frequency = QLineEdit()
         self.main_file_max_frequency = QLineEdit()
         self.main_file_min_frequency = QLineEdit()
+        self.main_file_call_type = QLineEdit()
+        self.main_file_scorer = QLineEdit()
+        self.main_file_date = QLineEdit()
+        self.main_file_experimenter = QLineEdit()
+        self.main_file_details = QLineEdit()
 
         self.main_file_name.setMaximumSize(200,20)
         self.main_file_number.setMaximumSize(200,20)
+        self.main_file_treatment.setMaximumSize(200,20)
         self.main_file_duration.setMaximumSize(200,20)
         self.main_file_average_frequency.setMaximumSize(200,20)
         self.main_file_max_frequency.setMaximumSize(200, 20)
         self.main_file_min_frequency.setMaximumSize(200,20)
+        self.main_file_call_type.setMaximumSize(200,20)
+        self.main_file_scorer.setMaximumSize(200,20)
+        self.main_file_date.setMaximumSize(200,20)
+        self.main_file_experimenter.setMaximumSize(200,20)
+        self.main_file_details.setMaximumSize(200,20)
 
         qline_style = "QLineEdit { background: #F0F8FF }"
+
         self.main_file_name.setStyleSheet(qline_style)
+        self.main_file_treatment.setStyleSheet(qline_style)
         self.main_file_number.setStyleSheet(qline_style)
         self.main_file_duration.setStyleSheet(qline_style)
         self.main_file_average_frequency.setStyleSheet(qline_style)
         self.main_file_max_frequency.setStyleSheet(qline_style)
         self.main_file_min_frequency.setStyleSheet(qline_style)
+        self.main_file_call_type.setStyleSheet(qline_style)
+        self.main_file_scorer.setStyleSheet(qline_style)
+        self.main_file_date.setStyleSheet(qline_style)
+        self.main_file_experimenter.setStyleSheet(qline_style)
+        self.main_file_details.setStyleSheet(qline_style)
 
         self.main_file_name.setReadOnly(True)
         self.main_file_number.setReadOnly(True)
@@ -158,16 +177,41 @@ class usv_gui (QMainWindow):
         self.main_file_average_frequency.setReadOnly(True)
         self.main_file_max_frequency.setReadOnly(True)
         self.main_file_min_frequency.setReadOnly(True)
+        self.main_file_call_type.setReadOnly(True)
 
 
         """-------------- ADD Labels ------------------"""
-
+        #font_stylesheet = "QLabel {font: 30pt Comic Sans MS}"
         label_file_name = QLabel("File Name:")
+        label_treatment = QLabel("Treatment: ")
         label_call_number = QLabel("Call Number: ")
         label_duration = QLabel("Duration: ")
-        label_frequency = QLabel("Average Freq: ")
+        label_frequency = QLabel("Frequency: ")
         label_max_frequency = QLabel("Max Frequency: ")
         label_min_frequency = QLabel("Min Frequency: ")
+        label_call_type = QLabel("Classification: ")
+        label_scorer = QLabel("Scorer: ")
+        label_date = QLabel("Date Scored: ")
+        label_experimenter = QLabel("Experimenter: ")
+        label_details = QLabel("Details: ")
+
+        init_font = label_call_type.font()
+        newfont = QFont()
+        newfont.setPointSize(13)
+
+        label_file_name.setFont(newfont)
+        label_treatment.setFont(newfont)
+        label_call_number.setFont(newfont)
+        label_duration.setFont(newfont)
+        label_frequency.setFont(newfont)
+        label_frequency.setFont(newfont)
+        label_max_frequency.setFont(newfont)
+        label_min_frequency.setFont(newfont)
+        label_call_type.setFont(newfont)
+        label_scorer.setFont(newfont)
+        label_date.setFont(newfont)
+        label_experimenter.setFont(newfont)
+        label_details.setFont(newfont)
 
 
         """"-------------- SET WINDOW ------------------"""
@@ -195,18 +239,30 @@ class usv_gui (QMainWindow):
         self.glayout.addItem(self.spacer,0,0,1,3)
 
         self.glayout.addWidget(label_file_name, 1, 13, 1, 1)
-        self.glayout.addWidget(label_call_number, 2, 13, 1, 1)
-        self.glayout.addWidget(label_duration, 3, 13, 1, 1)
-        self.glayout.addWidget(label_frequency, 4, 13, 1, 1)
-        self.glayout.addWidget(label_min_frequency, 5, 13, 1, 1)
-        self.glayout.addWidget(label_max_frequency, 6, 13, 1, 1)
+        self.glayout.addWidget(label_treatment, 2, 13, 1, 1)
+        self.glayout.addWidget(label_call_number, 3, 13, 1, 1)
+        self.glayout.addWidget(label_duration, 4, 13, 1, 1)
+        self.glayout.addWidget(label_frequency, 5, 13, 1, 1)
+        self.glayout.addWidget(label_min_frequency, 6, 13, 1, 1)
+        self.glayout.addWidget(label_max_frequency, 7, 13, 1, 1)
+        self.glayout.addWidget(label_call_type, 8, 13, 1, 1)
+        self.glayout.addWidget(label_scorer, 9, 13, 1, 1)
+        self.glayout.addWidget(label_date, 10, 13, 1, 1)
+        self.glayout.addWidget(label_experimenter, 11, 13, 1, 1)
+        self.glayout.addWidget(label_details, 12, 13, 1, 1)
 
         self.glayout.addWidget(self.main_file_name, 1, 14, 1, 1)
-        self.glayout.addWidget(self.main_file_number, 2, 14, 1, 1)
-        self.glayout.addWidget(self.main_file_duration, 3, 14, 1, 1)
-        self.glayout.addWidget(self.main_file_average_frequency, 4, 14, 1, 1)
-        self.glayout.addWidget(self.main_file_min_frequency, 5, 14, 1, 1)
-        self.glayout.addWidget(self.main_file_max_frequency, 6, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_treatment,2, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_number, 3, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_duration, 4, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_average_frequency, 5, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_min_frequency, 6, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_max_frequency, 7, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_call_type, 8, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_scorer, 9, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_date, 10, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_experimenter, 11, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_details, 12, 14, 1, 1)
 
         #self.glayout.addItem()
 
@@ -553,7 +609,7 @@ class usv_gui (QMainWindow):
                 eng.addpath(self.path_matlab_script)
                 print(command)
                 try:
-                    """ Audio Directory, files passed, Single, multiple, output directory """
+                    """ Audio Directory, files passed, output directory """
                     eng.process_rusv(folder_path,files_name , self.path_extracted ,nargout=0)
                 except:
 
@@ -738,19 +794,19 @@ class usv_gui (QMainWindow):
         self.source_model.setMinimumSize(400,20)
         self.source_model.setMaximumSize(400, 20)
 
-        dataout_button =QPushButton("Output Directory: ", self.classify_dialog)
-        dataout_button.move(15,145)
+        dataout_button =QPushButton("Save Data Directory: ", self.classify_dialog)
+        dataout_button.move(15,195)
         dataout_button.clicked.connect(self.getoutdata)
         self.source_dataout = QLineEdit(self.classify_dialog)
-        self.source_dataout.move(170,150 )
+        self.source_dataout.move(170,195)
         self.source_dataout.setMinimumSize(400, 20)
         self.source_dataout.setMaximumSize(400, 20)
 
-        source_button = QPushButton("Data Directory:", self.classify_dialog)
-        source_button.move(15,195)
+        source_button = QPushButton("Load Data Directory:", self.classify_dialog)
+        source_button.move(15,145)
         source_button.clicked.connect(self.getindata)
         self.source_datain = QLineEdit(self.classify_dialog)
-        self.source_datain.move(170,195)
+        self.source_datain.move(170,150 )
         self.source_datain.setMinimumSize(400, 20)
         self.source_datain.setMaximumSize(400, 20)
 
@@ -760,9 +816,11 @@ class usv_gui (QMainWindow):
             if self.source_model.text().find(".pth") == -1 :
                 self.source_model.setStyleSheet("color:red")
                 print("Color red")
+                self.model_ready = False
             else:
                 self.source_model.setStyleSheet("color:black")
                 print("Color black")
+                self.model_ready = True
 
             self.source_datain.setText(self.path_classified)
             self.source_dataout.setText(self.path_output_classified)
@@ -775,8 +833,13 @@ class usv_gui (QMainWindow):
 
         #set_button.acc
     def apply_classify(self):
-        self.classify_dialog.close()
-        self.classify_status= True
+
+        """Check if everything is filled when apply is pressed"""
+        if self.model_ready == True:
+            self.classify_dialog.close()
+            self.classify_status= True
+        else:
+            QMessageBox.about(self, 'Warning', 'Error Selecting Model')
 
     def cancel_classify(self):
         self.classify_dialog.close()
@@ -809,10 +872,12 @@ class usv_gui (QMainWindow):
 
         if self.source_model.text().find(".pth") == -1:
             self.source_model.setStyleSheet("color:red")
-            print("Color red")
+            #print("Color red")
+            self.model_ready = False
         else:
             self.source_model.setStyleSheet("color:black")
-            print("Color black")
+            #print("Color black")
+            self.model_ready = True
 
     def model_apply(self):
         if self.temp_model_path and self.temp_path_indata and self.temp_path_outdir:
