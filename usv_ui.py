@@ -135,7 +135,7 @@ class usv_gui (QMainWindow):
         self.main_file_treatment = QLineEdit()
         self.main_file_number = QLineEdit()
         self.main_file_duration = QLineEdit()
-        self.main_file_average_frequency = QLineEdit()
+        self.main_file_frequency = QLineEdit()
         self.main_file_max_frequency = QLineEdit()
         self.main_file_min_frequency = QLineEdit()
         self.main_file_call_type = QLineEdit()
@@ -148,7 +148,7 @@ class usv_gui (QMainWindow):
         self.main_file_number.setMaximumSize(200,20)
         self.main_file_treatment.setMaximumSize(200,20)
         self.main_file_duration.setMaximumSize(200,20)
-        self.main_file_average_frequency.setMaximumSize(200,20)
+        self.main_file_frequency.setMaximumSize(200,20)
         self.main_file_max_frequency.setMaximumSize(200, 20)
         self.main_file_min_frequency.setMaximumSize(200,20)
         self.main_file_call_type.setMaximumSize(200,20)
@@ -163,7 +163,7 @@ class usv_gui (QMainWindow):
         self.main_file_treatment.setStyleSheet(qline_style)
         self.main_file_number.setStyleSheet(qline_style)
         self.main_file_duration.setStyleSheet(qline_style)
-        self.main_file_average_frequency.setStyleSheet(qline_style)
+        self.main_file_frequency.setStyleSheet(qline_style)
         self.main_file_max_frequency.setStyleSheet(qline_style)
         self.main_file_min_frequency.setStyleSheet(qline_style)
         self.main_file_call_type.setStyleSheet(qline_style)
@@ -176,7 +176,7 @@ class usv_gui (QMainWindow):
         self.main_file_treatment.setReadOnly(True)
         self.main_file_number.setReadOnly(True)
         self.main_file_duration.setReadOnly(True)
-        self.main_file_average_frequency.setReadOnly(True)
+        self.main_file_frequency.setReadOnly(True)
         self.main_file_max_frequency.setReadOnly(True)
         self.main_file_min_frequency.setReadOnly(True)
         self.main_file_call_type.setReadOnly(True)
@@ -261,7 +261,7 @@ class usv_gui (QMainWindow):
         self.glayout.addWidget(self.main_file_treatment,2, 14, 1, 1)
         self.glayout.addWidget(self.main_file_number, 3, 14, 1, 1)
         self.glayout.addWidget(self.main_file_duration, 4, 14, 1, 1)
-        self.glayout.addWidget(self.main_file_average_frequency, 5, 14, 1, 1)
+        self.glayout.addWidget(self.main_file_frequency, 5, 14, 1, 1)
         self.glayout.addWidget(self.main_file_min_frequency, 6, 14, 1, 1)
         self.glayout.addWidget(self.main_file_max_frequency, 7, 14, 1, 1)
         self.glayout.addWidget(self.main_file_call_type, 8, 14, 1, 1)
@@ -374,10 +374,24 @@ class usv_gui (QMainWindow):
             os.chdir(path)
             with open('info.csv') as csvdata:
                 print(path)
-                self.csvread = csv.reader(csvdata, delimiter=',')
-                for row in self.csvread:
-                    print(row)
-                #print(self.csvreader[0])
+                self.csvdata = list(csv.reader(csvdata, delimiter=','))
+                #for row in self.csvdata:
+                #    print(row)
+                print(self.csvdata[0])
+
+                self.main_file_name.setText(self.csvdata[1][0])
+                self.main_file_treatment.setText(self.csvdata[1][1])
+                self.main_file_number.setText(self.csvdata[1][2])
+                self.main_file_duration.setText(self.csvdata[1][3])
+                self.main_file_frequency.setText(self.csvdata[1][4])
+                self.main_file_max_frequency.setText(self.csvdata[1][5])
+                self.main_file_min_frequency.setText(self.csvdata[1][6])
+                self.main_file_call_type.setText(self.csvdata[1][7])
+                self.main_file_scorer.setText(self.csvdata[1][8])
+                self.main_file_date.setText(self.csvdata[1][9])
+                self.main_file_experimenter.setText(self.csvdata[1][10])
+                self.main_file_details.setText(self.csvdata[1][11])
+
             os.chdir(self.path)
         except:
             print("Error loading csv file")
@@ -393,7 +407,7 @@ class usv_gui (QMainWindow):
         if self.current_image < len(self.view_images):
             self.current_image = self.current_image+1
             self.label.setPixmap(QPixmap(self.view_images[self.current_image]))
-
+            self.select_info()
 
 
     def previous_image(self):
@@ -401,8 +415,24 @@ class usv_gui (QMainWindow):
         #print("previous image")
         if self.current_image > 0 and self.current_image != 0:
             self.current_image = self.current_image - 1
-
             self.label.setPixmap(QPixmap(self.view_images[self.current_image]))
+            self.select_info()
+
+    def select_info(self):
+
+        self.main_file_name.setText(self.csvdata[self.current_image+1][0])
+        self.main_file_treatment.setText(self.csvdata[self.current_image+1][1])
+        self.main_file_number.setText(self.csvdata[self.current_image+1][2])
+        self.main_file_duration.setText(self.csvdata[self.current_image+1][3])
+        self.main_file_frequency.setText(self.csvdata[self.current_image+1][4])
+        self.main_file_max_frequency.setText(self.csvdata[self.current_image+1][5])
+        self.main_file_min_frequency.setText(self.csvdata[self.current_image+1][6])
+        self.main_file_call_type.setText(self.csvdata[self.current_image+1][7])
+        self.main_file_scorer.setText(self.csvdata[self.current_image+1][8])
+        self.main_file_date.setText(self.csvdata[self.current_image+1][9])
+        self.main_file_experimenter.setText(self.csvdata[self.current_image+1][10])
+        self.main_file_details.setText(self.csvdata[self.current_image+1][11])
+
 
     def open_folder(self):
 

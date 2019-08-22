@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="42f0b61b-cf93-490a-9dc7-782329a8a1d5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usv_images/extracted/T0008610_08152019143950/info.csv" beforeDir="false" afterPath="$PROJECT_DIR$/usv_images/extracted/T0008610_08152019143950/info.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usv_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/usv_ui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
