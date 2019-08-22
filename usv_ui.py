@@ -15,6 +15,7 @@ import subprocess
 import pathlib
 import threading
 import platform
+import csv
 
 """Importing Pytorch Training models"""
 
@@ -142,7 +143,7 @@ class usv_gui (QMainWindow):
         self.main_file_date = QLineEdit()
         self.main_file_experimenter = QLineEdit()
         self.main_file_details = QLineEdit()
-git
+
         self.main_file_name.setMaximumSize(200,20)
         self.main_file_number.setMaximumSize(200,20)
         self.main_file_treatment.setMaximumSize(200,20)
@@ -172,12 +173,17 @@ git
         self.main_file_details.setStyleSheet(qline_style)
 
         self.main_file_name.setReadOnly(True)
+        self.main_file_treatment.setReadOnly(True)
         self.main_file_number.setReadOnly(True)
         self.main_file_duration.setReadOnly(True)
         self.main_file_average_frequency.setReadOnly(True)
         self.main_file_max_frequency.setReadOnly(True)
         self.main_file_min_frequency.setReadOnly(True)
         self.main_file_call_type.setReadOnly(True)
+        self.main_file_scorer.setReadOnly(True)
+        self.main_file_date.setReadOnly(True)
+        self.main_file_experimenter.setReadOnly(True)
+        self.main_file_details.setReadOnly(True)
 
 
         """-------------- ADD Labels ------------------"""
@@ -222,7 +228,7 @@ git
 
         #self.glayout.addWidget(self.list, 0, 0, 5, 3)
         # self.glayout.addItem(verticalSpacer)
-        self.glayout.addWidget(self.label, 0, 2, 10, 10)
+        self.glayout.addWidget(self.label, 0, 2, 14, 14)
 
         #self.glayout.addWidget(self.combobox, 9, 0)
 
@@ -230,8 +236,8 @@ git
 
         #self.glayout.addWidget(self.load_button, 9, 2)
         #self.glayout.addWidget(self.start_button, 9, 3)
-        self.glayout.addWidget(self.previous_button, 10, 5)
-        self.glayout.addWidget(self.next_button, 10, 7)
+        self.glayout.addWidget(self.previous_button, 16, 5)
+        self.glayout.addWidget(self.next_button, 16, 7)
 
         self.spacer = QSpacerItem(20,20)
         self.glayout.addItem(self.spacer, 11, 0)
@@ -364,6 +370,18 @@ git
 
         #print(list_of_images)
         self.view_images = list_of_images
+        try:
+            os.chdir(path)
+            with open('info.csv') as csvdata:
+                print(path)
+                self.csvread = csv.reader(csvdata, delimiter=',')
+                for row in self.csvread:
+                    print(row)
+                #print(self.csvreader[0])
+            os.chdir(self.path)
+        except:
+            print("Error loading csv file")
+
         if len (self.view_images) > 0:
             self.label.setPixmap( QPixmap(self.view_images[0]))
             #print(self.view_images[0])
