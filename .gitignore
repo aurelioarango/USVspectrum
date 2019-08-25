@@ -1,6 +1,7 @@
 # ignore folder
 # Byte-compiled / optimized / DLL files
-*__pycache__*
+**/__pycache__
+.idea
 
 usv_models/
 models_extra/
@@ -19,3 +20,5 @@ models_extra/
 *.mat
 *.LOG
 *.log
+*.bak
+*-ubuntu.py

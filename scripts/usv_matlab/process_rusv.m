@@ -103,6 +103,9 @@ for j=1:numel(handles.flist)
             fprintf("exists")
         end
 
+        % write stat of syllables to a csv file
+        write_syllables_stat(handles)
+        
         for i=1:(handles.num_elements)
             write_syllables(handles,i);
             %show_syllables(handles,i);
@@ -998,6 +1001,27 @@ function [syllable_data, syllable_stats, filestats, fs] = syllable_activity_file
 
     end
 
+end
+
+function write_syllables_stat(handles)
+    [pathstr, name, ext] = fileparts(handles.filename);
+    csv_filename = strcat(name, ".csv"); 
+    filename = fullfile(handles.image_dir,csv_filename );
+    data = cell2mat(handles.syllable_data(5:9, :));
+    [nr, nc] = cellfun(@size, handles.syllable_data(3, :));  % num of rows and cols in each extracted image
+    data = [nc; data];
+    data = [1:handles.num_elements; data];
+    data = [data; cell2mat(handles.syllable_stats(2:14, :))];
+    % csv header
+    cHeader = {'Call num' 'pixel length' 'start' 'end' 'ncall' 'sigma_noise' 'mu_noise' 'start frequency' 'final frequency' 'minimum frequency' 'maximum frequency' 'frequency bandwidth' 'duration after noise reduction' 'start time' 'end time' 'avg frequency?' 'mean energy' 'peak amplitude' 'duration before noise reduction' 'distance to next syllable'};
+    textHeader = strjoin(cHeader, ',');
+    fid = fopen(filename,'w'); 
+    fprintf(fid,'%s\n',textHeader);
+    fclose(fid);
+    dlmwrite(filename, transpose(data),'-append');
+    %csvwrite(filename, transpose(data));
+    %for i=1:(handles.num_elements)
+    %end
 end
 
 function write_syllables(handles, syllable_ndx)
